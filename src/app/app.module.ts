@@ -12,6 +12,7 @@ import { SupportComponent } from './support/support.component';
 import { BillingComponent } from './billing/billing.component';
 import { CmsComponent } from './cms/cms.component';
 import { HeaderComponent } from './global/header/header.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HeaderComponent } from './global/header/header.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
