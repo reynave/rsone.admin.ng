@@ -1,125 +1,129 @@
 <app-header></app-header>
-<ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New Support Request</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-        <form onsubmit="return false">
-            <div class="form-group row">
-              <label for="text" class="col-4 col-form-label">Title</label> 
-              <div class="col-8">
-                <input id="text" name="title" type="text" class="form-control">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="textarea" class="col-4 col-form-label">Description</label> 
-              <div class="col-8">
-                <textarea id="textarea" name="description" cols="40" rows="5" class="form-control"></textarea>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="select" class="col-4 col-form-label">Satus</label> 
-              <div class="col-8">
-                <select id="select" name="status" class="custom-select">
-                  <option value="open">Open</option>
-                  <option value="processed">Processed</option>
-                  <option value="closed">Closed</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="text" class="col-4 col-form-label">Reported by</label> 
-              <div class="col-8">
-                <input id="text" name="reported_by" type="text" class="form-control">
-              </div>
-            </div> 
-          </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-      &nbsp;
-      <button type="button" class="btn btn-outline-primary" (click)="modal.close('Save click')">Submit</button>
-    </div>
-  </ng-template>
-
-  <ng-template #content2 let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title-detail">Detail Support Request</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-        <form onsubmit="return false">
-            <div class="form-group row">
-              <label for="text" class="col-4 col-form-label">CASE Number</label> 
-              <div class="col-8">
-                <input readonly name="text" type="text" class="form-control-plaintext" value="CAS-00001">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="text" class="col-4 col-form-label">Title</label> 
-              <div class="col-8">
-                <input readonly name="text" type="text" class="form-control-plaintext" value="Lampu Jalan Mati">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="textarea" class="col-4 col-form-label">Description</label> 
-              <div class="col-8">
-                <input readonly class="form-control-plaintext" type="text" value="Mohon segera ditindaklanjuti laporan ini">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="select" class="col-4 col-form-label">Status</label> 
-              <div class="col-8">
-                <input readonly name="text" type="text" class="form-control-plaintext" value="Open">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="select" class="col-4 col-form-label">Report by</label> 
-              <div class="col-8">
-                <input readonly name="text" type="text" class="form-control-plaintext" value="Firdaus">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="select" class="col-4 col-form-label">Created Date</label> 
-              <div class="col-8">
-                <input readonly name="text" type="text" class="form-control-plaintext" value="29/06/2021 15:09">
-              </div>
-            </div>
-          </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-    </div>
-  </ng-template>
-
 <main class="flex-shrink-0">
-    <div class="container">
-        <h4 class="mt-5">Support</h4>
-        <p><a role="button" class="btn btn-primary btn-sm" (click)="open(content)">Create New Request</a></p>
-        <table datatable [dtOptions]="dtOptions" class="row-border hover">
-        <thead>
-            <tr>
-            <th>Case Number</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Created Date</th>
-            <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of jsonData">
-                <td>{{ item.case_number }}</td>
-                <td>{{ item.title }}</td>
-                <td>{{ item.description }}</td>
-                <td>{{ item.created_date }}</td>
-                <td><a role="button" class="btn btn-primary btn-sm" (click)="open2(content2)">Detail</a></td>
-            </tr>
-        </tbody>
-        </table>
-    </div>
+  <div class="container">
+    <h4 class="mt-5">Support</h4>
+    <p><a role="button" class="btn btn-primary btn-sm" (click)="open(modalNewRequest)">Create New Request</a></p>
+    <table id="example" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>Case Number</th>
+          <th>Name Request</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Created Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td>{{ item.ticketNumber }}</td>
+          <td>{{ item.userId }}</td> 
+          <td>{{ item.subject }}</td> 
+          <td>{{ item.input_date }}</td>
+          <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalDetail); obj= item">Detail</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </main>
+
+
+<ng-template #modalNewRequest let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Support Request</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form onsubmit="return false">
+      <div class="form-group row">
+        <label for="text" class="col-4 col-form-label">Title</label>
+        <div class="col-8">
+          <input id="text" name="title" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="textarea" class="col-4 col-form-label">Description</label>
+        <div class="col-8">
+          <textarea id="textarea" name="description" cols="40" rows="5" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="select" class="col-4 col-form-label">Satus</label>
+        <div class="col-8">
+          <select id="select" name="status" class="custom-select">
+            <option value="open">Open</option>
+            <option value="processed">Processed</option>
+            <option value="closed">Closed</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="text" class="col-4 col-form-label">Reported by</label>
+        <div class="col-8">
+          <input id="text" name="reported_by" type="text" class="form-control">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    &nbsp;
+    <button type="button" class="btn btn-outline-primary" (click)="modal.close('Save click')">Submit</button>
+  </div>
+</ng-template>
+
+<ng-template #modalDetail let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-detail">Detail Support Request</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{obj | json}}
+    <form onsubmit="return false">
+      <div class="form-group row">
+        <label for="text" class="col-4 col-form-label">CASE Number</label>
+        <div class="col-8">
+         {{ obj.ticketNumber}}
+          <input readonly name="text" type="text" class="form-control-plaintext" value="CAS-00001">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="text" class="col-4 col-form-label">Title</label>
+        <div class="col-8">
+          <input readonly name="text" type="text" class="form-control-plaintext" value="Lampu Jalan Mati">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="textarea" class="col-4 col-form-label">Description</label>
+        <div class="col-8">
+          <input readonly class="form-control-plaintext" type="text" value="Mohon segera ditindaklanjuti laporan ini">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="select" class="col-4 col-form-label">Status</label>
+        <div class="col-8">
+          <input readonly name="text" type="text" class="form-control-plaintext" value="Open">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="select" class="col-4 col-form-label">Report by</label>
+        <div class="col-8">
+          <input readonly name="text" type="text" class="form-control-plaintext" value="Firdaus">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="select" class="col-4 col-form-label">Created Date</label>
+        <div class="col-8">
+          <input readonly name="text" type="text" class="form-control-plaintext" value="29/06/2021 15:09">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  </div>
+</ng-template>

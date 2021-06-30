@@ -11,19 +11,17 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active"  href="javascript:;" [routerLink]="[ '/home' ]">Home</a>
+                        <a class="nav-link {{active == 'home' ? 'active':''}} "  href="javascript:;" [routerLink]="[ '/home' ]">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:;" [routerLink]="[ '/billing' ]">Billing</a>
+                        <a class="nav-link  {{active == 'billing' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/billing' ]">Billing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:;" [routerLink]="[ '/support' ]">Support</a>
+                        <a class="nav-link  {{active == 'support' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/support' ]">Support</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:;" [routerLink]="[ '/cms' ]">Cms</a>
-                    </li>
-
- 
+                        <a class="nav-link  {{active == 'cms' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/cms' ]">Cms</a>
+                    </li> 
                 </ul>
                
             </div>

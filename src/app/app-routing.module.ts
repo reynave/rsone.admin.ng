@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BillingComponent } from './billing/billing.component';
 import { CmsComponent } from './cms/cms.component';
+import { AuthGuard } from './guard/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ReloginComponent } from './login/relogin/relogin.component';
@@ -13,10 +14,10 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "relogin", component: ReloginComponent },
   
-  { path: "home", component: HomeComponent },
-  { path: "cms", component: CmsComponent },
-  { path: "billing", component: BillingComponent },
-  { path: "support", component: SupportComponent },
+  { path: "home", component: HomeComponent, canActivate: [AuthGuard], data:{active:"home"} },
+  { path: "cms", component: CmsComponent, data:{active:"cms"}  },
+  { path: "billing", component: BillingComponent, data:{active:"billing"} },
+  { path: "support", component: SupportComponent, data:{active:"support"} },
  
   { path: "**", component: NotFoundComponent }
 

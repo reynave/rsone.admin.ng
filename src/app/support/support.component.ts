@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ConfigService } from 'src/app/service/config.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+declare var $ : any;
 
 @Component({
   selector: 'app-support',
@@ -7,51 +12,41 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./support.component.css']
 })
 export class SupportComponent implements OnInit {
+  items: any = []; 
 
-  closeResult = '';
-  title = 'datatables';
-  dtOptions: DataTables.Settings = {};
-
-  constructor(private modalService: NgbModal) { }
+  constructor(
+    private modalService: NgbModal,
+    private http: HttpClient,
+    private configService: ConfigService,
+  ) { }
 
   ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-    };
+    
+    this.getHttp();
   }
 
+
+  getHttp() {
+    this.http.get<any>(environment.api + "support/index", {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+        console.log(data); 
+        this.items =  data['items']; 
+        $(document).ready(function() {
+          $('#example').DataTable();
+        } );
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+  }
+  obj: any = [];
   open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService.open(content);
   }
 
-  open2(content2: any) {
-    this.modalService.open(content2, {ariaLabelledBy: 'modal-basic-title-detail'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  jsonData : any = [{
-    case_number: 'CAS-00001',
-    title: 'Lampu Jalan Mati',
-    description: 'Mohon segera ditindaklanjuti laporan ini',
-    created_date: '29/06/2021 15:09'
-  }];
 
 }
