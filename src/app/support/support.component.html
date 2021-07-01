@@ -18,7 +18,8 @@
         <tr *ngFor="let item of items">
           <td>{{ item.ticketNumber }}</td>
           <td>{{ item.userId }}</td> 
-          <td>{{ item.subject }}</td> 
+          <td>{{ item.subject }}</td>
+          <td>{{ item.note }}</td> 
           <td>{{ item.input_date }}</td>
           <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalDetail); obj= item">Detail</a></td>
         </tr>
@@ -40,19 +41,19 @@
       <div class="form-group row">
         <label for="text" class="col-4 col-form-label">Title</label>
         <div class="col-8">
-          <input id="text" name="title" type="text" class="form-control">
+          <input id="subject" name="title" type="text" class="form-control">
         </div>
       </div>
       <div class="form-group row">
         <label for="textarea" class="col-4 col-form-label">Description</label>
         <div class="col-8">
-          <textarea id="textarea" name="description" cols="40" rows="5" class="form-control"></textarea>
+          <textarea id="note" name="description" cols="40" rows="5" class="form-control"></textarea>
         </div>
       </div>
       <div class="form-group row">
-        <label for="select" class="col-4 col-form-label">Satus</label>
+        <label for="select" class="col-4 col-form-label">Status</label>
         <div class="col-8">
-          <select id="select" name="status" class="custom-select">
+          <select id="status" name="status" class="custom-select">
             <option value="open">Open</option>
             <option value="processed">Processed</option>
             <option value="closed">Closed</option>
@@ -82,37 +83,35 @@
     </button>
   </div>
   <div class="modal-body">
-    {{obj | json}}
     <form onsubmit="return false">
       <div class="form-group row">
         <label for="text" class="col-4 col-form-label">CASE Number</label>
         <div class="col-8">
-         {{ obj.ticketNumber}}
-          <input readonly name="text" type="text" class="form-control-plaintext" value="CAS-00001">
+          <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.ticketNumber}}">
         </div>
       </div>
       <div class="form-group row">
         <label for="text" class="col-4 col-form-label">Title</label>
         <div class="col-8">
-          <input readonly name="text" type="text" class="form-control-plaintext" value="Lampu Jalan Mati">
+          <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.subject}}">
         </div>
       </div>
       <div class="form-group row">
         <label for="textarea" class="col-4 col-form-label">Description</label>
         <div class="col-8">
-          <input readonly class="form-control-plaintext" type="text" value="Mohon segera ditindaklanjuti laporan ini">
+          <input readonly class="form-control-plaintext" type="text" value="{{ obj.note}}">
         </div>
       </div>
       <div class="form-group row">
         <label for="select" class="col-4 col-form-label">Status</label>
         <div class="col-8">
-          <input readonly name="text" type="text" class="form-control-plaintext" value="Open">
+          <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.supportStatusId }}">
         </div>
       </div>
       <div class="form-group row">
         <label for="select" class="col-4 col-form-label">Report by</label>
         <div class="col-8">
-          <input readonly name="text" type="text" class="form-control-plaintext" value="Firdaus">
+          <input readonly name="text" type="text" class="form-control-plaintext" value="{{obj.userId}}">
         </div>
       </div>
       <div class="form-group row">

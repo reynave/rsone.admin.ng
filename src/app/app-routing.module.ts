@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: "relogin", component: ReloginComponent },
   
   { path: "home", component: HomeComponent, canActivate: [AuthGuard], data:{active:"home"} },
-  { path: "cms", component: CmsComponent, data:{active:"cms"}  },
-  { path: "billing", component: BillingComponent, data:{active:"billing"} },
-  { path: "support", component: SupportComponent, data:{active:"support"} },
+  { path: "cms", component: CmsComponent, canActivate: [AuthGuard], data:{active:"cms"}  },
+  { path: "billing", component: BillingComponent, canActivate: [AuthGuard], data:{active:"billing"} },
+  { path: "support", component: SupportComponent, canActivate: [AuthGuard], data:{active:"support"} },
  
   { path: "**", component: NotFoundComponent }
 
