@@ -1,8 +1,41 @@
 <app-header></app-header>
+
+<!-- <div class="nav-scroller bg-body shadow-sm">
+  <nav class="nav nav-underline" aria-label="Secondary navigation">
+    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+    <a class="nav-link" href="#">
+      Friends
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">27</span>
+    </a>
+    <a class="nav-link" href="#">Explore</a>
+    <a class="nav-link" href="#">Suggestions</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+  </nav>
+</div> -->
+
 <main class="flex-shrink-0">
   <div class="container">
-    <h4 class="mt-5">Support</h4>
-    <p><a role="button" class="btn btn-primary btn-sm" (click)="open(modalNewRequest)">Create New Request</a></p>
+
+
+
+    <div class="row mb-4">
+      <div class="col-6">
+        <strong>SUPPORT</strong>
+      </div>
+      <div class="col-6 text-right">
+        <a role="button" class="btn btn-primary btn-sm" (click)="open(modalNewRequest)">Create New Request</a>
+      </div>
+
+
+    </div>
+
+
+
+
     <table id="example" class="display" style="width:100%">
       <thead>
         <tr>
@@ -17,9 +50,9 @@
       <tbody>
         <tr *ngFor="let item of items">
           <td>{{ item.ticketNumber }}</td>
-          <td>{{ item.userId }}</td> 
+          <td>{{ item.userId }}</td>
           <td>{{ item.subject }}</td>
-          <td>{{ item.note }}</td> 
+          <td>{{ item.note }}</td>
           <td>{{ item.input_date }}</td>
           <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalDetail); obj= item">Detail</a></td>
         </tr>
@@ -30,24 +63,38 @@
 
 
 <ng-template #modalNewRequest let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">New Support Request</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form onsubmit="return false">
+  <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">New Support Request</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      {{model |json}}
       <div class="form-group row">
         <label for="text" class="col-4 col-form-label">Title</label>
         <div class="col-8">
-          <input id="subject" name="title" type="text" class="form-control">
+
+          <input type="text" class="form-control" id="subject" required [(ngModel)]="model.subject" name="subject" #subject="ngModel">
+
+          <div [hidden]="subject.valid || subject.pristine" class="mt-2 text-danger">
+            subject is required
+          </div>
+
         </div>
       </div>
       <div class="form-group row">
         <label for="textarea" class="col-4 col-form-label">Description</label>
         <div class="col-8">
-          <textarea id="note" name="description" cols="40" rows="5" class="form-control"></textarea>
+
+          
+
+          <textarea id="note" name="note" required [(ngModel)]="model.note" cols="40" rows="5" class="form-control" #note="ngModel"></textarea> 
+          <div [hidden]="note.valid || note.pristine" class="mt-2 text-danger">
+            subject is required
+          </div>
+
         </div>
       </div>
       <div class="form-group row">
@@ -66,13 +113,14 @@
           <input id="text" name="reported_by" type="text" class="form-control">
         </div>
       </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-    &nbsp;
-    <button type="button" class="btn btn-outline-primary" (click)="modal.close('Save click')">Submit</button>
-  </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+      &nbsp;
+      <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
+    </div>
+  </form>
 </ng-template>
 
 <ng-template #modalDetail let-modal>
@@ -83,44 +131,44 @@
     </button>
   </div>
   <div class="modal-body">
-    <form onsubmit="return false">
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">CASE Number</label>
-        <div class="col-8">
-          <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.ticketNumber}}">
-        </div>
+
+    <div class="form-group row">
+      <label for="text" class="col-4 col-form-label">CASE Number</label>
+      <div class="col-8">
+        <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.ticketNumber}}">
       </div>
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">Title</label>
-        <div class="col-8">
-          <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.subject}}">
-        </div>
+    </div>
+    <div class="form-group row">
+      <label for="text" class="col-4 col-form-label">Title</label>
+      <div class="col-8">
+        <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.subject}}">
       </div>
-      <div class="form-group row">
-        <label for="textarea" class="col-4 col-form-label">Description</label>
-        <div class="col-8">
-          <input readonly class="form-control-plaintext" type="text" value="{{ obj.note}}">
-        </div>
+    </div>
+    <div class="form-group row">
+      <label for="textarea" class="col-4 col-form-label">Description</label>
+      <div class="col-8">
+        <input readonly class="form-control-plaintext" type="text" value="{{ obj.note}}">
       </div>
-      <div class="form-group row">
-        <label for="select" class="col-4 col-form-label">Status</label>
-        <div class="col-8">
-          <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.supportStatusId }}">
-        </div>
+    </div>
+    <div class="form-group row">
+      <label for="select" class="col-4 col-form-label">Status</label>
+      <div class="col-8">
+        <input readonly name="text" type="text" class="form-control-plaintext" value="{{ obj.supportStatusId }}">
       </div>
-      <div class="form-group row">
-        <label for="select" class="col-4 col-form-label">Report by</label>
-        <div class="col-8">
-          <input readonly name="text" type="text" class="form-control-plaintext" value="{{obj.userId}}">
-        </div>
+    </div>
+    <div class="form-group row">
+      <label for="select" class="col-4 col-form-label">Report by</label>
+      <div class="col-8">
+        <input readonly name="text" type="text" class="form-control-plaintext" value="{{obj.userId}}">
       </div>
-      <div class="form-group row">
-        <label for="select" class="col-4 col-form-label">Created Date</label>
-        <div class="col-8">
-          <input readonly name="text" type="text" class="form-control-plaintext" value="29/06/2021 15:09">
-        </div>
+    </div>
+    <div class="form-group row">
+      <label for="select" class="col-4 col-form-label">Created Date</label>
+      <div class="col-8">
+        <input readonly name="text" type="text" class="form-control-plaintext" value="29/06/2021 15:09">
       </div>
-    </form>
+    </div>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>

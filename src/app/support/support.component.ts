@@ -6,6 +6,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $ : any;
 
+export class Model {
+  constructor(
+    public subject: string,
+    public note: string
+  ) { } 
+}
+
+
 @Component({
   selector: 'app-support',
   templateUrl: './support.component.html',
@@ -13,6 +21,7 @@ declare var $ : any;
 })
 export class SupportComponent implements OnInit {
   items: any = []; 
+  model : any = new Model("","");
 
   constructor(
     private modalService: NgbModal,
@@ -43,6 +52,30 @@ export class SupportComponent implements OnInit {
 
     );
   }
+
+  onSubmit(){
+
+    const body = {
+      data : this.model,
+    }
+
+    console.log(body);
+    
+    this.http.post<any>(environment.api + "support/onSubmit", body, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+        console.log(data); 
+       // window.location.reload();
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+  }
+
+
   obj: any = [];
   open(content: any) {
     this.modalService.open(content);
