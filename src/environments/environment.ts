@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api : "https://a-morphosys.com/clients/residence.one/"
+  api : "https://a-morphosys.com/application/residence.one/user.api/"
 };
 
 /*

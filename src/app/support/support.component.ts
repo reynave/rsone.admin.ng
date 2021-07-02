@@ -8,8 +8,11 @@ declare var $ : any;
 
 export class Model {
   constructor(
+    public id: number,
+    public ticketNumber: string,
     public subject: string,
-    public note: string
+    public note: string,
+    public supportStatusId: number
   ) { } 
 }
 
@@ -21,7 +24,8 @@ export class Model {
 })
 export class SupportComponent implements OnInit {
   items: any = []; 
-  model : any = new Model("","");
+  model : any = new Model(0,"","","",0);
+  getId: any;
 
   constructor(
     private modalService: NgbModal,
@@ -65,8 +69,8 @@ export class SupportComponent implements OnInit {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
-        console.log(data); 
-       // window.location.reload();
+       console.log(data); 
+       window.location.reload();
       },
       error => {
         console.log(error);
@@ -75,6 +79,27 @@ export class SupportComponent implements OnInit {
     );
   }
 
+  onUpdateSubmit(){
+
+    const body = {
+      data : { id : this.getId, supportStatusId : this.model.supportStatusId }, // 
+    }
+
+    console.log(body);
+    
+    this.http.post<any>(environment.api + "support/onUpdateSubmit", body, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+       console.log(data); 
+       window.location.reload();
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+  }
 
   obj: any = [];
   open(content: any) {
