@@ -13,7 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SupportComponent } from './support/support.component';
 import { BillingComponent } from './billing/billing.component';
 import { CmsComponent } from './cms/cms.component';
-import { HeaderComponent } from './global/header/header.component'; 
+import { HeaderComponent } from './global/header/header.component';
+import { UsersComponent } from './users/users.component'; 
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HeaderComponent } from './global/header/header.component';
     SupportComponent,
     BillingComponent,
     CmsComponent,
-    HeaderComponent
+    HeaderComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { ReloginComponent } from './login/relogin/relogin.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SupportComponent } from './support/support.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: "cms", component: CmsComponent, canActivate: [AuthGuard], data:{active:"cms"}  },
   { path: "billing", component: BillingComponent, canActivate: [AuthGuard], data:{active:"billing"} },
   { path: "support", component: SupportComponent, canActivate: [AuthGuard], data:{active:"support"} },
+  { path: "users", component: UsersComponent, canActivate: [AuthGuard], data:{active:"users"} },
  
   { path: "**", component: NotFoundComponent }
 
