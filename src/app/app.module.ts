@@ -14,7 +14,8 @@ import { SupportComponent } from './support/support.component';
 import { BillingComponent } from './billing/billing.component';
 import { CmsComponent } from './cms/cms.component';
 import { HeaderComponent } from './global/header/header.component';
-import { UsersComponent } from './users/users.component'; 
+import { UsersComponent } from './users/users.component';
+import { DetailComponent } from './cms/detail/detail.component'; 
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UsersComponent } from './users/users.component';
     BillingComponent,
     CmsComponent,
     HeaderComponent,
-    UsersComponent
+    UsersComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

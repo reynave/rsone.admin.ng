@@ -1,4 +1,60 @@
 <app-header></app-header>
-<main class="container">
-    <h4>Billing</h4>
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-6">
+        <strong>Billing</strong>
+      </div>
+      <div class="col-6 text-right">
+        <!--<a role="button" class="btn btn-primary btn-sm" (click)="open(modalUpload)">Upload</a>-->
+        <input type="file" class="d-none" id="filename" required name="filename" #filename (change)="onChange($event)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        <a role="button" class="btn btn-primary btn-sm" (click)="filename.click()"><i class="fas fa-upload"></i> Upload Excel</a>
+      </div>
+    </div>
+    <table id="example" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Debtor A/C</th>
+          <th>Tarif IPL OLD</th>
+          <th>Tarif IPL New (MAR'20)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td>{{item['NO']}}</td>
+          <td>{{item['Debtor A/c']}}</td>
+          <td>{{item['TARIF IPL OLD']}}</td>
+          <td>{{item['TARIF IPL NEW (MAR\'20)']}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </main>
+
+<!--<ng-template #modalUpload let-modal>
+  <form #myForm="ngForm" (submit)="onUpload()" enctype="multipart/form-data">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Upload file</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group row">
+        <label for="text" class="col-4 col-form-label">Click here to upload</label>
+        <div class="col-8">
+         <input type="file" class="form-control" id="filename" required [(ngModel)]="model.filename" name="filename" #filename="ngModel" (change)="onChange($event)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            <div [hidden]="filename.valid || filename.pristine" class="mt-2 text-danger">
+            file is required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+      &nbsp;
+      <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Upload</button>
+    </div>
+  </form>
+</ng-template>-->

@@ -18,17 +18,16 @@ export class Model {
 }
 
 @Component({
-  selector: 'app-cms',
-  templateUrl: './cms.component.html',
-  styleUrls: ['./cms.component.css']
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.css']
 })
-export class CmsComponent implements OnInit {
+export class DetailComponent implements OnInit {
 
   items: any = [];
   obj: any = [];
   model: any = new Model(0,"","",0);
   getId: any;
-  show: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -38,98 +37,69 @@ export class CmsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.getHttp();    
-  }
-
-  showForm(){
-    this.show = true;
-  }
-
-  hideForm(){
-    this.show = false;
+    this.getHttp();
   }
 
   getHttp() {
-    this.http.get<any>(environment.api + "content/index", {
+    let getId = localStorage.getItem('getId');
+    if(getId != ''){
+    this.http.get<any>(environment.api + "content/detail/"+getId, {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
         console.log(data); 
-        this.items =  data['items']; 
-        $(document).ready(function() {
-          $('#example').DataTable();
-        });
+        this.items = data;
+        this.model.id = this.items['id'];
+        this.model.status = this.items['status'];
+        this.model.name = this.items['name'];
+        this.model.content = this.items['content'];
       },
       error => {
         console.log(error);
       },
 
     );
-  }
-
-  cms_create(){
-     localStorage.setItem('getId', '');
-     localStorage.setItem('action', 'create');
-     this.router.navigate(['/cms/create/']);
-  }
-
-  cms_detail(id: string){
-     localStorage.setItem('getId', id);
-     localStorage.setItem('action', 'detail');
-     this.router.navigate(['/cms/detail/'+id]);
+    }
   }
 
   onSubmit(){
-
+    let action = localStorage.getItem('action');
     const body = {
       data : this.model,
     }
-
     console.log(body);
     
+    if(action == 'create'){
     this.http.post<any>(environment.api + "content/onSubmit", body, {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
        console.log(data); 
-       window.location.reload();
+       //window.location.reload();
+       this.router.navigate(['/cms']);
       },
       error => {
         console.log(error);
       },
-
     );
-  }
-
-  onUpdateSubmit(){
-
-    const body = {
-      data : this.model, // 
-    }
-
-    console.log(body);
-    
+    } else if(action == 'detail') {
     this.http.post<any>(environment.api + "content/onUpdateSubmit", body, {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
        console.log(data); 
-       window.location.reload();
+       this.router.navigate(['/cms']);
       },
       error => {
         console.log(error);
       },
-
     );
+    }
   }
 
-  open(content: any, obj: any) {
-    this.model.id = obj.id;
-    this.model.status = obj.status;
-    this.model.name = obj.name;
-    this.model.content = obj.content;
-    this.modalService.open(content, { size: 'lg' });
-  }
+  back(){
+     localStorage.setItem('getId', '');
+     this.router.navigate(['/cms']);
+}
 
 }

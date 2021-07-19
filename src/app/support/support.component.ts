@@ -26,6 +26,7 @@ export class SupportComponent implements OnInit {
   items: any = []; 
   model : any = new Model(0,"","","",0);
   getId: any;
+  obj: any = [];
 
   constructor(
     private modalService: NgbModal,
@@ -101,9 +102,9 @@ export class SupportComponent implements OnInit {
     );
   }
 
-  obj: any = [];
-  open(content: any) {
-    this.modalService.open(content);
+  open(content: any, obj: any) {
+    this.model.supportStatusId = obj.supportStatusId;
+    this.modalService.open(content, { size: 'lg' });
   }
 
 
