@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +16,11 @@ import { BillingComponent } from './billing/billing.component';
 import { CmsComponent } from './cms/cms.component';
 import { HeaderComponent } from './global/header/header.component';
 import { UsersComponent } from './users/users.component';
-import { DetailComponent } from './cms/detail/detail.component'; 
+import { DetailComponent } from './cms/detail/detail.component';
+import { ResidenceComponent } from './residence/residence.component'; 
+import { NgxLoadingModule } from 'ngx-loading';
+//import { NgSelect2Module } from 'ng-select2';
+//import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,13 +34,18 @@ import { DetailComponent } from './cms/detail/detail.component';
     CmsComponent,
     HeaderComponent,
     UsersComponent,
-    DetailComponent
+    DetailComponent,
+    ResidenceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule, HttpClientModule, 
     FormsModule,
+    EditorModule,
+    //FormsModule,
+    //NgSelect2Module,
+    NgxLoadingModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,12 @@
 <app-header></app-header>
+<div class="my-container">
+    <ng-template #customLoadingTemplate>
+        <div class="center-pos">
+            <h3 style="color:white;">Loading...</h3>
+        </div>
+    </ng-template>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>
 <main class="flex-shrink-0">
   <div class="container">
     <div class="row mb-4">
@@ -21,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of items; let i = index" [hidden]=" i < 3">
+        <tr *ngFor="let item of items; let i = index" [hidden]=" i < 2">
           <td>{{item['NO']}}</td>
           <td>{{item['Debtor A/c']}}</td>
           <td>{{item['TARIF IPL OLD']}}</td>

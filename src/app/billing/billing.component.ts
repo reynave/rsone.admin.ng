@@ -16,6 +16,7 @@ export class BillingComponent implements OnInit {
 
   file: any; // Variable to store file
   items: any = [];
+  loading: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -25,6 +26,7 @@ export class BillingComponent implements OnInit {
 ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.getHttp(); 
   }
 
@@ -38,10 +40,11 @@ export class BillingComponent implements OnInit {
     this.http.get<any>(environment.api + "billing/index", {
       headers: this.configService.headers()
     }).subscribe(
-      data => {  
+      data => {
+        this.loading = false;
         this.items =  data; 
         $(document).ready(function() {
-          $('#example').DataTable();
+          $('#example').DataTable({"lengthMenu": [ [250,500], [250, 500] ],"ordering": false});
         });
       },
       error => {
@@ -54,6 +57,11 @@ export class BillingComponent implements OnInit {
   /*onUpload(){
     this.fileUploadService.upload(this.file);
   }*/
+
+  showAlert(){
+     this.loading = false;
+     console.log("Ok");
+  }
 
   open(content: any) {
     this.modalService.open(content, { size: 'lg' });

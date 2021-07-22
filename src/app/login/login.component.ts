@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.configService.token()) {
-      this.router.navigate(['home']);
+      this.router.navigate(['support']);
     }else{
       console.log("Silakan Login!");
     }
