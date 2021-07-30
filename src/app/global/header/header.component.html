@@ -3,8 +3,6 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" [routerLink]="[ '/home' ]" href="javascript:;">Residence.One</a>
-
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,7 +24,16 @@
                         <a class="nav-link  {{active == 'residence' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/residence' ]">Residence</a>
                     </li> 
                 </ul>
-               
+                <div class="text-right">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{uname}}</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                       <li><a class="dropdown-item" href="javascript:;" (click)="logout()">Logout</a></li>
+                   </ul>
+                 </li>
+                </ul>
+               </div>
             </div>
         </div>
     </nav>

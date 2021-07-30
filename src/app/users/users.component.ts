@@ -44,10 +44,9 @@ export class UsersComponent implements OnInit {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
-        console.log(data); 
         this.items =  data['items']; 
         $(document).ready(function() {
-          $('#example').DataTable();
+          $('#example-user').DataTable({"lengthMenu":[ [250,500],[250,500]],"ordering": false,"scrollX": true});
         } );
       },
       error => {

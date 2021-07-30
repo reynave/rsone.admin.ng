@@ -63,9 +63,13 @@ export class ResidenceComponent implements OnInit {
       headers: this.configService.headers()
     }).subscribe(
       data => {  
-        this.items = data['items']; 
+        this.items = data['items'].filter((item: any) => {
+           let result: any;
+           result = item.user_name != null;
+           return result;
+        }); 
         $(document).ready(function() {
-          $('#example').DataTable();
+          $('#example').DataTable({"lengthMenu":[ [250,500],[250,500]],"ordering": false});
         });
       },
       error => {

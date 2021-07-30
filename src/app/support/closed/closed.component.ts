@@ -21,14 +21,12 @@ export class Model {
 
 
 @Component({
-  selector: 'app-support',
-  templateUrl: './support.component.html',
-  styleUrls: ['./support.component.css']
+  selector: 'app-closed',
+  templateUrl: './closed.component.html',
+  styleUrls: ['./closed.component.css']
 })
-export class SupportComponent implements OnInit {
+export class ClosedComponent implements OnInit {
   items: any = [];  // open
-  items2: any = []; // in-progress
-  items3: any = []; // closed
   model : any = new Model(0,"","","",0,0);
   getId: any;
   obj: any = [];
@@ -52,7 +50,7 @@ export class SupportComponent implements OnInit {
 
 
   getHttp() {
-    this.http.get<any>(environment.api + "support/index", {
+    this.http.get<any>(environment.api + "support/closed", {
       headers: this.configService.headers()
     }).subscribe(
       data => { 

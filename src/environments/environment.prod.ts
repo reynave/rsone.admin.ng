@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api : "https://a-morphosys.com/clients/residence.one/user.api/"
+  api : "https://forwards.or.id/admin.api/"
 };

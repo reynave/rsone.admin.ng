@@ -2,17 +2,19 @@
 
 <main class="flex-shrink-0">
   <div class="container-fluid">
+
            <ul class="nav nav-tabs">
               <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="javascript:;">Open</a>
+                  <a class="nav-link" aria-current="page" href="javascript:;" [routerLink]="[ '/support' ]">Open</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="javascript:;" [routerLink]="[ '/support/inprogress' ]">In-progress</a>
+                  <a class="nav-link active" href="javascript:;">In-progress</a>
               </li>
               <li class="nav-item">
                    <a class="nav-link" href="javascript:;" [routerLink]="[ '/support/closed' ]">Closed</a>
               </li>
           </ul>
+
     <div class="row mb-4 mt-4">
       <div class="col-6">
         <strong>SUPPORT</strong>

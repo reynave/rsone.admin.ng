@@ -12,4 +12,8 @@ export class ReloginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  back(){
+    window.location.href = '/';
+  }
+
 }

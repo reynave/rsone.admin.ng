@@ -8,7 +8,7 @@
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
 </div>
 <main class="flex-shrink-0">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row mb-4">
       <div class="col-6">
         <strong>Billing</strong>
@@ -19,50 +19,175 @@
         <a role="button" class="btn btn-primary btn-sm" (click)="filename.click()"><i class="fas fa-upload"></i> Upload Excel</a>
       </div>
     </div>
-    <table id="example" class="display" style="width:100%">
+    <table id="example" class="display nowrap" style="width:100%">
       <thead>
         <tr>
           <th>No</th>
           <th>Debtor A/C</th>
+          <th>Name</th>
           <th>Tarif IPL OLD</th>
           <th>Tarif IPL New (MAR'20)</th>
+          <th>Nov-2015</th>
+          <th>Des-2015</th>
+          <th>Jan-2016</th>
+          <th>Feb-2016</th>
+          <th>Mar-2016</th>
+          <th>Apr-2016</th>
+          <th>Mei-2016</th>
+          <th>Jun-2016</th>
+          <th>Jul-2016</th>
+          <th>Ags-2016</th>
+          <th>Sep-2016</th>
+          <th>Okt-2016</th>
+          <th>Nov-2016</th>
+          <th>Des-2016</th>
+          <th>Jan-2017</th>
+          <th>Feb-2017</th>
+          <th>Mar-2017</th>
+          <th>Apr-2017</th>
+          <th>Mei-2017</th>
+          <th>Jun-2017</th>
+          <th>Jul-2017</th>
+          <th>Ags-2017</th>
+          <th>Sep-2017</th>
+          <th>Okt-2017</th>
+          <th>Nov-2017</th>
+          <th>Des-2017</th>
+          <th>Jan-2018</th>
+          <th>Feb-2018</th>
+          <th>Mar-2018</th>
+          <th>Apr-2018</th>
+          <th>Mei-2018</th>
+          <th>Jun-2018</th>
+          <th>Jul-2018</th>
+          <th>Ags-2018</th>
+          <th>Sep-2018</th>
+          <th>Okt-2018</th>
+          <th>Nov-2018</th>
+          <th>Des-2018</th>
+          <th>Jan-2019</th>
+          <th>Feb-2019</th>
+          <th>Mar-2019</th>
+          <th>Apr-2019</th>
+          <th>Mei-2019</th>
+          <th>Jun-2019</th>
+          <th>Jul-2019</th>
+          <th>Ags-2019</th>
+          <th>Sep-2019</th>
+          <th>Okt-2019</th>
+          <th>Nov-2019</th>
+          <th>Des-2019</th>
+          <th>Jan-2020</th>
+          <th>Feb-2020</th>
+          <th>Mar-2020</th>
+          <th>Apr-2020</th>
+          <th>Mei-2020</th>
+          <th>Jun-2020</th>
+          <th>Jul-2020</th>
+          <th>Ags-2020</th>
+          <th>Sep-2020</th>
+          <th>Okt-2020</th>
+          <th>Nov-2020</th>
+          <th>Des-2020</th>
+          <th>Jan-2021</th>
+          <th>Feb-2021</th>
+          <th>Mar-2021</th>
+          <th>Apr-2021</th>
+          <th>Mei-2021</th>
+          <th>Jun-2021</th>
+          <th>Jul-2021</th>
+          <th>Ags-2021</th>
+          <th>Sep-2021</th>
+          <th>Okt-2021</th>
+          <th>Nov-2021</th>
+          <th>Des-2021</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of items; let i = index" [hidden]=" i < 2">
-          <td>{{item['NO']}}</td>
-          <td>{{item['Debtor A/c']}}</td>
-          <td>{{item['TARIF IPL OLD']}}</td>
-          <td>{{item['TARIF IPL NEW (MAR\'20)']}}</td>
-        </tr>
+         <ng-container *ngIf="items">
+            <tr *ngFor="let item of items; let i = index;">
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[5] | number}}</td>
+                <td>{{item[6] | number}}</td>
+                <td>{{item[7] | number}}</td>
+                <td>{{item[8] | number}}</td>
+                <td>{{item[9] | number}}</td>
+                <td>{{item[10] | number}}</td>
+                <td>{{item[11] | number}}</td>
+                <td>{{item[12] | number}}</td>
+                <td>{{item[13] | number}}</td>
+                <td>{{item[14] | number}}</td>
+                <td>{{item[15] | number}}</td>
+                <td>{{item[16] | number}}</td>
+                <td>{{item[17] | number}}</td>
+                <td>{{item[18] | number}}</td>
+                <td>{{item[19] | number}}</td>
+                <td>{{item[20] | number}}</td>
+                <td>{{item[21] | number}}</td>
+                <td>{{item[22] | number}}</td>
+                <td>{{item[23] | number}}</td>
+                <td>{{item[24] | number}}</td>
+                <td>{{item[25] | number}}</td>
+                <td>{{item[26] | number}}</td>
+                <td>{{item[27] | number}}</td>
+                <td>{{item[28] | number}}</td>
+                <td>{{item[29] | number}}</td>
+                <td>{{item[30] | number}}</td>
+                <td>{{item[31] | number}}</td>
+                <td>{{item[32] | number}}</td>
+                <td>{{item[33] | number}}</td>
+                <td>{{item[34] | number}}</td>
+                <td>{{item[35] | number}}</td>
+                <td>{{item[36] | number}}</td>
+                <td>{{item[37] | number}}</td>
+                <td>{{item[38] | number}}</td>
+                <td>{{item[39] | number}}</td>
+                <td>{{item[40] | number}}</td>
+                <td>{{item[41] | number}}</td>
+                <td>{{item[42] | number}}</td>
+                <td>{{item[43] | number}}</td>
+                <td>{{item[44] | number}}</td>
+                <td>{{item[45] | number}}</td>
+                <td>{{item[46] | number}}</td>
+                <td>{{item[47] | number}}</td>
+                <td>{{item[48] | number}}</td>
+                <td>{{item[49] | number}}</td>
+                <td>{{item[50] | number}}</td>
+                <td>{{item[51] | number}}</td>
+                <td>{{item[52] | number}}</td>
+                <td>{{item[53] | number}}</td>
+                <td>{{item[54] | number}}</td>
+                <td>{{item[55] | number}}</td>
+                <td>{{item[56] | number}}</td>
+                <td>{{item[57] | number}}</td>
+                <td>{{item[58] | number}}</td>
+                <td>{{item[59] | number}}</td>
+                <td>{{item[60] | number}}</td>
+                <td>{{item[61] | number}}</td>
+                <td>{{item[62] | number}}</td>
+                <td>{{item[63] | number}}</td>
+                <td>{{item[64] | number}}</td>
+                <td>{{item[65] | number}}</td>
+                <td>{{item[66] | number}}</td>
+                <td>{{item[67] | number}}</td>
+                <td>{{item[68] | number}}</td>
+                <td>{{item[69] | number}}</td>
+                <td>{{item[70] | number}}</td>
+                <td>{{item[71] | number}}</td>
+                <td>{{item[72] | number}}</td>
+                <td>{{item[73] | number}}</td>
+                <td>{{item[74] | number}}</td>
+                <td>{{item[75] | number}}</td>
+                <td>{{item[76] | number}}</td>
+                <td>{{item[77] | number}}</td>
+                <td>{{item[78] | number}}</td>
+                <td>{{item[79] | number}}</td>
+                <td>{{item[80] | number}}</td>
+            </tr>
+         </ng-container>
       </tbody>
     </table>
   </div>
 </main>
-
-<!--<ng-template #modalUpload let-modal>
-  <form #myForm="ngForm" (submit)="onUpload()" enctype="multipart/form-data">
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Upload file</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">Click here to upload</label>
-        <div class="col-8">
-         <input type="file" class="form-control" id="filename" required [(ngModel)]="model.filename" name="filename" #filename="ngModel" (change)="onChange($event)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-            <div [hidden]="filename.valid || filename.pristine" class="mt-2 text-danger">
-            file is required
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-      &nbsp;
-      <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Upload</button>
-    </div>
-  </form>
-</ng-template>-->

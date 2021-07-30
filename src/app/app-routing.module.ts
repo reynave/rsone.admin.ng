@@ -11,6 +11,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SupportComponent } from './support/support.component';
 import { UsersComponent } from './users/users.component';
 import { ResidenceComponent } from './residence/residence.component';
+import { InprogressComponent } from './support/inprogress/inprogress.component';
+import { ClosedComponent } from './support/closed/closed.component';
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: "cms/detail/:id", component: DetailComponent, canActivate: [AuthGuard], data:{active:"cms"}  },
   { path: "billing", component: BillingComponent, canActivate: [AuthGuard], data:{active:"billing"} },
   { path: "support", component: SupportComponent, canActivate: [AuthGuard], data:{active:"support"} },
+  { path: "support/inprogress", component: InprogressComponent, canActivate: [AuthGuard], data:{active:"support"} },
+  { path: "support/closed", component: ClosedComponent, canActivate: [AuthGuard], data:{active:"support"} },
   { path: "users", component: UsersComponent, canActivate: [AuthGuard], data:{active:"users"} },
   { path: "residence", component: ResidenceComponent, canActivate: [AuthGuard], data:{active:"residence"} },
  

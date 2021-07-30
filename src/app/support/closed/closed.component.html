@@ -2,17 +2,19 @@
 
 <main class="flex-shrink-0">
   <div class="container-fluid">
+
            <ul class="nav nav-tabs">
               <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="javascript:;">Open</a>
+                  <a class="nav-link" aria-current="page" href="javascript:;" [routerLink]="[ '/support' ]">Open</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="javascript:;" [routerLink]="[ '/support/inprogress' ]">In-progress</a>
               </li>
               <li class="nav-item">
-                   <a class="nav-link" href="javascript:;" [routerLink]="[ '/support/closed' ]">Closed</a>
+                   <a class="nav-link active" href="javascript:;">Closed</a>
               </li>
           </ul>
+
     <div class="row mb-4 mt-4">
       <div class="col-6">
         <strong>SUPPORT</strong>
@@ -133,11 +135,12 @@
     <div class="form-group row">
       <label for="select" class="col-4 col-form-label">Status</label>
       <div class="col-8">
-        <select id="supportStatusId" name="supportStatusId" class="custom-select" required [(ngModel)]="model.supportStatusId" #supportStatusId="ngModel" [ngModelOptions]="{standalone: true}">
+        <select *ngIf="obj.supportStatusId != 100" id="supportStatusId" name="supportStatusId" class="custom-select" required [(ngModel)]="model.supportStatusId" #supportStatusId="ngModel" [ngModelOptions]="{standalone: true}">
             <option [value]="1" [selected]="model.supportStatusId == 1" value="1">Open</option>
             <option [value]="2" [selected]="model.supportStatusId == 2" value="2">In-Progress</option>
             <option [value]="100" [selected]="model.supportStatusId == 100" value="100">Closed</option>
         </select>
+        <span *ngIf="obj.supportStatusId == 100">Closed</span>
       </div>
     </div>
     <p style="border-bottom: 1px solid #ced4da;"></p>

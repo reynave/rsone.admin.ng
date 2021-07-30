@@ -1,12 +1,9 @@
 <app-header></app-header>
 <main class="flex-shrink-0">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row mb-4">
-      <div class="col-6">
+      <div class="col-12">
         <strong>Residence</strong>
-      </div>
-      <div class="col-6 text-right">
-        <a role="button" class="btn btn-primary btn-sm" (click)="open(modalForm,[])">Create New Residence</a>
       </div>
     </div>
     <table id="example" class="display" style="width:100%">
@@ -23,8 +20,8 @@
         <tr *ngFor="let item of items">
           <td>{{item.house}}</td>
           <td>{{item.user_name}}</td>
-          <td>{{item.rt}}</td>
-          <td>{{item.rw}}</td>
+          <td>{{item.rt_user}}</td>
+          <td>{{item.rw_user}}</td>
           <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalForm, item); obj = item;">Detail</a></td>
         </tr>
       </tbody>
@@ -45,7 +42,7 @@
         <label for="text" class="col-4 col-form-label">House</label>
         <div class="col-8">
           <input type="hidden" id="id" [(ngModel)]="model.id" name="id" #id="ngModel">
-          <input type="text" class="form-control" id="house" required [(ngModel)]="model.house" name="house" #house="ngModel">
+          <input type="text" class="form-control-plaintext" readonly id="house" required [(ngModel)]="model.house" name="house" #house="ngModel">
           <div [hidden]="house.valid || house.pristine" class="mt-2 text-danger">
             house is required
           </div>
@@ -56,20 +53,12 @@
       <div class="form-group row">
         <label for="text" class="col-4 col-form-label">User</label>
         <div class="col-8">
-          <input *ngIf="model.id>0" type="text" class="form-control" id="userName" readonly [(ngModel)]="model.userName" name="userName" #userName="ngModel">
-          <div *ngIf="obj == null">
             <select class="form-control" id="userId" required [(ngModel)]="model.userId" name="userId" #userId="ngModel">
-              <option *ngFor="let ui of userItems" value="{{ui.id}}">{{ui.name}}</option>
+              <option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.userId == ui.id">{{ui.name}}</option>
             </select>
-            <!--<ng-select2 
-	      [(ngModel)]="model.userId"
-	      [data]="userItems"
-	      [placeholder]="'Please select a user...'">		
-            </ng-select2>-->
             <div [hidden]="userId.valid || userId.pristine" class="mt-2 text-danger">
               user is required
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -77,7 +66,10 @@
       <div class="form-group row">
         <label for="text" class="col-4 col-form-label">RT</label>
         <div class="col-8">
-          <input type="text" class="form-control" id="rt" required [(ngModel)]="model.rt" name="rt" #rt="ngModel">
+          <!--<input type="text" class="form-control" id="rt" required [(ngModel)]="model.rt" name="rt" #rt="ngModel">-->
+          <select class="form-control" id="rt" required [(ngModel)]="model.rt" name="rt" #rt="ngModel">
+              <option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rt == ui.id">{{ui.name}}</option>
+          </select>
           <div [hidden]="rt.valid || rt.pristine" class="mt-2 text-danger">
             rt is required
           </div>
@@ -88,7 +80,10 @@
       <div class="form-group row">
         <label for="text" class="col-4 col-form-label">RW</label>
         <div class="col-8">
-          <input type="text" class="form-control" id="rw" required [(ngModel)]="model.rw" name="rw" #rw="ngModel">
+          <!--<input type="text" class="form-control" id="rw" required [(ngModel)]="model.rw" name="rw" #rw="ngModel">-->
+          <select class="form-control" id="rw" required [(ngModel)]="model.rw" name="rw" #rw="ngModel">
+              <option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rw == ui.id">{{ui.name}}</option>
+          </select>
           <div [hidden]="rw.valid || rw.pristine" class="mt-2 text-danger">
             rw is required
           </div>

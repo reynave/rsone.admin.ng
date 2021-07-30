@@ -51,8 +51,9 @@ export class LoginComponent implements OnInit {
         this.note = data['data']['note'];
         if (data['data']['login'] === true) { 
           this.configService.setToken(data['data']['token']);
+          this.configService.setObj(data['data']);
           window.location.reload();
-          //this.router.navigate(['home']);
+          //this.router.navigate(['support']);
         } 
       },
       error => {

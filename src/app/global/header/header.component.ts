@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ConfigService } from 'src/app/service/config.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,15 +12,26 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   active: string = "";
+  uname: string = "";
   constructor(
     private activatedRoute: ActivatedRoute,
    // private http: HttpClient,
-   // private configService: ConfigService,
+    private configService: ConfigService,
+    private router : Router
     ) { }
 
   ngOnInit(): void {
     this.active = this.activatedRoute.snapshot.data.active;
     console.log(this.active);
+    let jsstr = localStorage.getItem("resoneClient_obj");
+    this.uname = JSON.parse(jsstr || '{}').username; //https://stackoverflow.com/a/46915314
   }
+
+  logout(){
+    this.configService.removeToken();
+    this.router.navigate(['/']);
+  }
+
+  //this._username = 'Administrator';
 
 }

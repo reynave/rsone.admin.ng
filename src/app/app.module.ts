@@ -19,8 +19,8 @@ import { UsersComponent } from './users/users.component';
 import { DetailComponent } from './cms/detail/detail.component';
 import { ResidenceComponent } from './residence/residence.component'; 
 import { NgxLoadingModule } from 'ngx-loading';
-//import { NgSelect2Module } from 'ng-select2';
-//import { FormsModule } from '@angular/forms';
+import { InprogressComponent } from './support/inprogress/inprogress.component';
+import { ClosedComponent } from './support/closed/closed.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,9 @@ import { NgxLoadingModule } from 'ngx-loading';
     HeaderComponent,
     UsersComponent,
     DetailComponent,
-    ResidenceComponent
+    ResidenceComponent,
+    InprogressComponent,
+    ClosedComponent
   ],
   imports: [
     BrowserModule,
@@ -43,8 +45,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     NgbModule, HttpClientModule, 
     FormsModule,
     EditorModule,
-    //FormsModule,
-    //NgSelect2Module,
+    FormsModule,
     NgxLoadingModule.forRoot({})
   ],
   providers: [],

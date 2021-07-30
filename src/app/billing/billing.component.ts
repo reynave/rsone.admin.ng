@@ -42,9 +42,14 @@ export class BillingComponent implements OnInit {
     }).subscribe(
       data => {
         this.loading = false;
-        this.items =  data; 
+        this.items =  data;
+        this.items = this.items.filter((item: any) => {
+           let result: any;
+           result = item[0] != 'NO' && item[0] != '';
+           return result;
+        });
         $(document).ready(function() {
-          $('#example').DataTable({"lengthMenu": [ [250,500], [250, 500] ],"ordering": false});
+          $('#example').DataTable({"lengthMenu":[ [250,500],[250,500]],"ordering": false,"scrollX": true});
         });
       },
       error => {
