@@ -87,7 +87,7 @@ export class ResidenceComponent implements OnInit {
 
     //window.location.reload();
     
-    this.http.post<any>(environment.api + "residence/onSubmit", body, {
+    this.http.post<any>(environment.api + "residence/onUpdateSubmit", body, {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
