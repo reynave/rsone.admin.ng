@@ -13,6 +13,7 @@ import { UsersComponent } from './users/users.component';
 import { ResidenceComponent } from './residence/residence.component';
 import { InprogressComponent } from './support/inprogress/inprogress.component';
 import { ClosedComponent } from './support/closed/closed.component';
+import { RtRwComponent } from './rt-rw/rt-rw.component';
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: "support/closed", component: ClosedComponent, canActivate: [AuthGuard], data:{active:"support"} },
   { path: "users", component: UsersComponent, canActivate: [AuthGuard], data:{active:"users"} },
   { path: "residence", component: ResidenceComponent, canActivate: [AuthGuard], data:{active:"residence"} },
+  { path: "rt-rw", component: RtRwComponent, canActivate: [AuthGuard], data:{active:"rt-rw"} },
  
   { path: "**", component: NotFoundComponent }
 

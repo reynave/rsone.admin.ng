@@ -1,12 +1,12 @@
 <app-header></app-header>
 <main class="flex-shrink-0">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row mb-4">
       <div class="col-6">
         <strong>USERS</strong>
       </div>
       <div class="col-6 text-right">
-        <a role="button" class="btn btn-primary btn-sm" (click)="open(modalUsers)">Create New User</a>
+        <a role="button" class="btn btn-primary btn-sm" (click)="open(modalUsers,model)">Create New User</a>
       </div>
     </div>
     <table id="example-user" class="display nowrap" style="width:100%">
@@ -16,7 +16,7 @@
           <th>Email</th>
           <th>Access Right</th>
           <th>Created Date</th>
-          <!--<th></th>-->
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -24,8 +24,8 @@
           <td>{{ item.name }}</td>
           <td>{{ item.email }}</td>
           <td>{{ item.access_name }}</td>
-          <td>{{ item.input_date }}</td>
-          <!--<td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalDetail); obj= item; getId = item.id;">Detail</a></td>-->
+          <td>{{ item.input_date | date:'H/MM/yyyy H:mm:ss' }}</td>
+          <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalUsers,item); obj= item; getId = item.id;">Detail</a></td>
         </tr>
       </tbody>
     </table>
@@ -35,97 +35,66 @@
 <ng-template #modalUsers let-modal>
   <form (ngSubmit)="onSubmit()" #myForm="ngForm">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New Users</h4>
+      <h4 class="modal-title" id="modal-basic-title">{{obj.id == '0' ? 'New':'Edit'}} Users</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">Name</label>
-        <div class="col-8">
-          <input class="form-control" id="name" name="name" class="form-control" required [(ngModel)]="model.name" #name="ngModel" value="">
-        </div>
+<table class="tg">
+<tbody>
+  <tr>
+    <td class="tg-0lax">Name</td>
+    <td class="tg-0lax">:</td>
+    <td class="tg-0lax">
+      <input class="form-control" id="name" name="name" class="form-control" required [(ngModel)]="model.name" #name="ngModel" value="">
+      <div [hidden]="name.valid || name.pristine" class="mt-2 text-danger">
+        name is required
       </div>
-      <p style="border-bottom: 1px solid #ced4da;"></p>
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">Email</label>
-        <div class="col-8">
-          <input class="form-control" id="email" name="email" class="form-control" required [(ngModel)]="model.email" #name="ngModel" value="">
-        </div>
+   </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Email</td>
+    <td class="tg-0lax">:</td>
+    <td class="tg-0lax">
+      <input class="form-control" id="email" name="email" class="form-control" required [(ngModel)]="model.email" #name="ngModel" value="">
+      <div [hidden]="name.valid || name.pristine" class="mt-2 text-danger">
+        email is required
       </div>
-      <p style="border-bottom: 1px solid #ced4da;"></p>
-      <div class="form-group row">
-        <label for="textarea" class="col-4 col-form-label">Access Right</label>
-        <div class="col-8">
-          <select id="id_user_access" name="id_user_access" class="custom-select" required [(ngModel)]="model.id_user_access" #id_user_access="ngModel">
-            <option *ngFor="let ai of accessItems" [value]="ai.id" [selected]="model.id_user_access == ai.id" value="ai.id">{{ai.name}}</option>
-          </select>
-        </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Access Right</td>
+    <td class="tg-0lax">:</td>
+    <td class="tg-0lax">
+      <select id="id_user_access" name="id_user_access" class="custom-select" required [(ngModel)]="model.id_user_access" #id_user_access="ngModel">
+         <option *ngFor="let ai of accessItems" [value]="ai.id" [selected]="model.id_user_access == ai.id" value="ai.id">{{ai.name}}</option>
+      </select>
+      <div [hidden]="id_user_access.valid || id_user_access.pristine" class="mt-2 text-danger">
+        name is required
       </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Status</td>
+    <td class="tg-0lax">:</td>
+    <td class="tg-0lax">
+      <select id="status" name="status" class="custom-select" required [(ngModel)]="model.status" #status="ngModel">
+         <option [value]="1" value="1">Active</option>
+         <option [value]="0" value="0">Suspend</option>
+      </select>
+      <div [hidden]="status.valid || status.pristine" class="mt-2 text-danger">
+        name is required
+      </div>
+</td>
+  </tr>
+</tbody>
+</table>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
       &nbsp;
       <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
     </div>
-  </form>
-</ng-template>
-
-<ng-template #modalDetail let-modal>
-  <form (ngSubmit)="onUpdateSubmit()" #myFormUpdate="ngForm">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title-detail">Detail User</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group row">
-      <label for="text" class="col-4 col-form-label">Name</label>
-      <div class="col-8">
-        <input readonly class="form-control-plaintext" value="{{ obj.name}}">
-      </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-      <label for="text" class="col-4 col-form-label">Email</label>
-      <div class="col-8">
-        <input readonly class="form-control-plaintext" value="{{ obj.email}}">
-      </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-      <label for="textarea" class="col-4 col-form-label">Access Right</label>
-      <div class="col-8">
-        <input readonly class="form-control-plaintext" value="{{ obj.access_name}}">
-      </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-        <label for="textarea" class="col-4 col-form-label">Status</label>
-        <div class="col-8">
-          <input readonly class="form-control-plaintext" value="{{ obj.status == 1 ? 'Active' : 'Non-active'}}">
-        </div>
-      </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-        <label for="textarea" class="col-4 col-form-label">Last Login</label>
-        <div class="col-8">
-          <input readonly class="form-control-plaintext" value="{{ obj.lastLogin}}">
-        </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-      <label for="textarea" class="col-4 col-form-label">Register Date</label>
-      <div class="col-8">
-        <input readonly class="form-control-plaintext" value="{{ obj.register_date}}">
-      </div>
-  </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-    <button type="submit" class="btn btn-success" [disabled]="!myFormUpdate.form.valid">Update</button>
-  </div>
   </form>
 </ng-template>

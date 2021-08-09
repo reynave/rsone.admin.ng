@@ -11,6 +11,8 @@
         <tr>
           <th>House</th>
           <th>User</th>
+          <th>No. RT</th>
+          <th>No. RW</th>
           <th>RT</th>
           <th>RW</th>
           <th>&nbsp;</th>
@@ -20,6 +22,8 @@
         <tr *ngFor="let item of items">
           <td>{{item.house}}</td>
           <td>{{item.user_name}}</td>
+          <td>{{item.no_rt}}</td>
+          <td>{{item.no_rw}}</td>
           <td>{{item.rt_user}}</td>
           <td>{{item.rw_user}}</td>
           <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalForm, item); obj = item;">Detail</a></td>
@@ -32,63 +36,47 @@
 <ng-template #modalForm let-modal>
   <form #myForm="ngForm" (submit)="onAction()">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New Residence</h4>
+      <h4 class="modal-title" id="modal-basic-title">Edit Residence</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">House</label>
-        <div class="col-8">
-          <input type="hidden" id="id" [(ngModel)]="model.id" name="id" #id="ngModel">
-          <input type="text" class="form-control-plaintext" readonly id="house" required [(ngModel)]="model.house" name="house" #house="ngModel">
-          <div [hidden]="house.valid || house.pristine" class="mt-2 text-danger">
-            house is required
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-body">
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">User</label>
-        <div class="col-8">
-            <select class="form-control" id="userId" required [(ngModel)]="model.userId" name="userId" #userId="ngModel">
-              <option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.userId == ui.id">{{ui.name}}</option>
-            </select>
-            <div [hidden]="userId.valid || userId.pristine" class="mt-2 text-danger">
-              user is required
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-body">
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">RT</label>
-        <div class="col-8">
-          <!--<input type="text" class="form-control" id="rt" required [(ngModel)]="model.rt" name="rt" #rt="ngModel">-->
-          <select class="form-control" id="rt" required [(ngModel)]="model.rt" name="rt" #rt="ngModel">
-              <option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rt == ui.id">{{ui.name}}</option>
-          </select>
-          <div [hidden]="rt.valid || rt.pristine" class="mt-2 text-danger">
-            rt is required
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-body">
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">RW</label>
-        <div class="col-8">
-          <!--<input type="text" class="form-control" id="rw" required [(ngModel)]="model.rw" name="rw" #rw="ngModel">-->
-          <select class="form-control" id="rw" required [(ngModel)]="model.rw" name="rw" #rw="ngModel">
-              <option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rw == ui.id">{{ui.name}}</option>
-          </select>
-          <div [hidden]="rw.valid || rw.pristine" class="mt-2 text-danger">
-            rw is required
-          </div>
-        </div>
-      </div>
+       <table class="tg">
+         <tbody>
+           <tr>
+             <td class="tg-0lax">House</td>
+             <td class="tg-0lax">:</td>
+             <td class="tg-0lax">
+                <input type="text" class="form-control" readonly id="house" required [(ngModel)]="model.house" name="house" #house="ngModel">
+             </td>
+          </tr>
+          <tr>
+             <td class="tg-0lax">User</td>
+             <td class="tg-0lax">:</td>
+             <td class="tg-0lax">
+                <select class="form-control" id="userId" required [(ngModel)]="model.userId" name="userId" #userId="ngModel">
+                   <option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.userId == ui.id">{{ui.name}}</option>
+                </select>
+                <div [hidden]="userId.valid || userId.pristine" class="mt-2 text-danger">
+                    user is required
+                </div>
+             </td>
+          </tr>
+          <tr>
+             <td class="tg-0lax">RT/RW</td>
+             <td class="tg-0lax">:</td>
+             <td class="tg-0lax">
+                <select class="form-control" id="rt_rw_id" required [(ngModel)]="model.rt_rw_id" name="rt_rw_id" #rt_rw_id="ngModel">
+                   <option *ngFor="let ui of rtrwItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rt_rw_id == ui.id">{{ui.no_rt+'/'+ui.no_rw}}</option>
+                </select>
+                <div [hidden]="userId.valid || userId.pristine" class="mt-2 text-danger">
+                    user is required
+                </div>
+             </td>
+          </tr>
+         </tbody>
+       </table>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>

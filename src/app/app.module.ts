@@ -21,6 +21,7 @@ import { ResidenceComponent } from './residence/residence.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { InprogressComponent } from './support/inprogress/inprogress.component';
 import { ClosedComponent } from './support/closed/closed.component';
+import { RtRwComponent } from './rt-rw/rt-rw.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ClosedComponent } from './support/closed/closed.component';
     DetailComponent,
     ResidenceComponent,
     InprogressComponent,
-    ClosedComponent
+    ClosedComponent,
+    RtRwComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,100 @@
+<app-header></app-header>
+<main class="flex-shrink-0">
+  <div class="container-fluid">
+    <div class="row mb-4">
+      <div class="col-6">
+        <strong>RT/RW</strong>
+      </div>
+      <div class="col-6 text-right">
+        <a role="button" class="btn btn-primary btn-sm" (click)="open(modalForm,[])">Create New RT/RW</a>
+      </div>
+    </div>
+    <table id="example" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>No. RT</th>
+          <th>No. RW</th>
+          <th>RT</th>
+          <th>RW</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td>{{item.no_rt}}</td>
+          <td>{{item.no_rw}}</td>
+          <td>{{item.rt_user}}</td>
+          <td>{{item.rw_user}}</td>
+          <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalForm, item); obj = item;">Detail</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+
+<ng-template #modalForm let-modal>
+  <form #myForm="ngForm" (submit)="onSubmit()">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">New RT/RW</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+	<table class="table-form">
+	<tbody>
+	  <tr>
+	    <td class="label p-2">No. RT</td>
+	    <td class="p-2">:</td>
+	    <td class="input p-2">
+	      <input type="text" class="form-control" id="no_rt" required [(ngModel)]="model.no_rt" name="no_rt" #no_rt="ngModel">
+	      <div [hidden]="no_rt.valid || no_rt.pristine" class="mt-2 text-danger">
+		no rt is required
+	      </div>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="label p-2">No. RW</td>
+	    <td class="p-2">:</td>
+	    <td class="input p-2">
+	      <input type="text" class="form-control" id="no_rw" required [(ngModel)]="model.no_rw" name="no_rw" #no_rw="ngModel">
+	      <div [hidden]="no_rw.valid || no_rw.pristine" class="mt-2 text-danger">
+	      no rw is required
+	      </div>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="label p-2">RT</td>
+	    <td class="p-2">:</td>
+	    <td class="input p-2">
+	      <select class="form-control" id="rt_userId" required [(ngModel)]="model.rt_userId" name="rt_userId" #rt_userId="ngModel">
+		<option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rt == ui.id">{{ui.name}}</option>
+	      </select>
+	      <div [hidden]="rt_userId.valid || rt_userId.pristine" class="mt-2 text-danger">
+		 rt is required
+	      </div>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="label p-2">RW</td>
+	    <td class="p-2">:</td>
+	    <td class="input p-2">
+	       <select class="form-control" id="rw_userId" required [(ngModel)]="model.rw_userId" name="rw_userId" #rw_userId="ngModel">
+		<option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rw == ui.id">{{ui.name}}</option>
+	       </select>
+	       <div [hidden]="rw_userId.valid || rw_userId.pristine" class="mt-2 text-danger">
+		 rw is required
+	       </div>
+	    </td>
+	  </tr>
+	</tbody>
+	</table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+      &nbsp;
+      <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
+    </div>
+  </form>
+</ng-template>

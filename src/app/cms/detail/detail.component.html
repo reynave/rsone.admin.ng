@@ -2,41 +2,49 @@
 <main class="flex-shrink-0">
   <div class="container-fluid">
     <form (ngSubmit)="onSubmit()" #myForm="ngForm">
-      <h4 class="modal-title" id="modal-basic-title">New CMS</h4>
-      <div class="form-group row">
-        <label for="text" class="col-4 col-form-label">Title</label>
-        <div class="col-8">
-          <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
-          <div [hidden]="name.valid || name.pristine" class="mt-2 text-danger">
-            name is required
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="textarea" class="col-4 col-form-label">Content</label>
-        <div class="col-8">
-          <editor [init]="config" id="content" name="content" required [(ngModel)]="model.content" #content="ngModel"></editor>
-          <div [hidden]="content.valid || content.pristine" class="mt-2 text-danger">
-            content is required
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="select" class="col-4 col-form-label">Status</label>
-        <div class="col-8">
-          <select id="status" name="status" class="custom-select" required [(ngModel)]="model.status" #status="ngModel">
-            <option [value]="0" [selected]="model.status == 0" value="0">Draft</option>
-            <option [value]="1" [selected]="model.status == 1" value="1">Published</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group row">
-         <div class="col-md-6 offset-md-4">
-            <a role="button" class="btn btn-outline-secondary" href="javascript:;" (click)="back()">Cancel</a>
-            &nbsp;
-            <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
-         </div>
-      </div>
+      <h5>{{model.id == '' ? 'New' : 'Edit' }} CMS</h5>
+     <table class="tg">
+        <tbody>
+          <tr>
+            <td class="tg-0pky w-25 text-right">Title</td>
+            <td class="tg-0pky w-1">:</td>
+            <td class="tg-0pky w-74">
+                 <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
+                 <div [hidden]="name.valid || name.pristine" class="mt-2 text-danger">
+                   name is required
+                 </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tg-0pky w-25 text-right">Status</td>
+            <td class="tg-0pky w-1">:</td>
+            <td class="tg-0pky w-74">
+               <select id="status" name="status" class="custom-select" required [(ngModel)]="model.status" #status="ngModel">
+                    <option [value]="0" [selected]="model.status == 0" value="0">Draft</option>
+                    <option [value]="1" [selected]="model.status == 1" value="1">Published</option>
+               </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="tg-0pky w-25 text-right">Content</td>
+            <td class="tg-0pky w-1">:</td>
+            <td class="tg-0pky w-74">
+               <editor [init]="config" id="content" name="content" required [(ngModel)]="model.content" #content="ngModel"></editor>
+               <div [hidden]="content.valid || content.pristine" class="mt-2 text-danger">
+                 content is required
+               </div>
+            </td>
+          </tr>
+          <tr>
+              <td colspan="2"></td>
+              <td colspan="3">
+                <a role="button" class="btn btn-outline-secondary" href="javascript:;" (click)="back()">Cancel</a>
+                &nbsp;
+                <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
+              </td>
+          </tr>
+        </tbody>
+     </table>
     </form>
   </div>
 </main>

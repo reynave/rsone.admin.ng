@@ -15,7 +15,8 @@ export class Model {
     public subject: string,
     public note: string,
     public supportStatusId: number,
-    public supportFormId: number
+    public supportFormId: number,
+    public userId: number
   ) { } 
 }
 
@@ -27,7 +28,7 @@ export class Model {
 })
 export class InprogressComponent implements OnInit {
   items: any = [];  // open
-  model : any = new Model(0,"","","",0,0);
+  model : any = new Model(0,"","","",0,0,1);
   getId: any;
   obj: any = [];
   //iurl: string;
@@ -118,9 +119,19 @@ export class InprogressComponent implements OnInit {
   }
 
   open(content: any, obj: any) {
-    this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl('https://forwards.or.id/admin.api/renov/index?ticket='+( obj != null ? obj.ticketNumber : ''));
-    this.new_tab = 'https://forwards.or.id/admin.api/renov/index?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
-    this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 1;
+    let fro = '';
+    if(obj.supportFormId == 2){ // izin
+       fro = 'izin';
+    }
+    else if(obj.supportFormId == 4){
+       fro = 'renov';
+    }
+    else if(obj.supportFormId == 1){
+       fro = 'deposit';
+    }
+    this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl('https://forwards.or.id/admin.api/formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : ''));
+    this.new_tab = 'https://forwards.or.id/admin.api/formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
+    this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 10;
     this.modalService.open(content, { size: 'lg' });
   }
 

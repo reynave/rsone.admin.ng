@@ -14,9 +14,7 @@ export class Model {
     public house: string,
     public userId: number,
     public userName: string,
-    public rt: number,
-    public rw: number,
-    public note: string
+    public rt_rw_id: number
   ) { } 
 }
 
@@ -31,8 +29,9 @@ export class ResidenceComponent implements OnInit {
 
   items: any = [];
   loading: boolean = false;
-  model : any = new Model(0,"",0,"",0,0,"");
+  model : any = new Model(0,"",0,"",0);
   userItems: any = [];
+  rtrwItems: any = [];
   obj: any;
 
   constructor(
@@ -52,6 +51,18 @@ export class ResidenceComponent implements OnInit {
     }).subscribe(
         data => {  
           this.userItems = data['items'];
+        },
+        error => {
+          console.error(error);
+          alert(error);
+        },
+    );
+
+    this.http.get<any>(environment.api + "rtrw/index", {
+        headers: this.configService.headers()
+    }).subscribe(
+        data => {  
+          this.rtrwItems = data['items'];
         },
         error => {
           console.error(error);
@@ -87,7 +98,7 @@ export class ResidenceComponent implements OnInit {
 
     //window.location.reload();
     
-    this.http.post<any>(environment.api + "residence/onUpdateSubmit", body, {
+    this.http.post<any>(environment.api + "residence/onSubmit", body, {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
@@ -102,13 +113,7 @@ export class ResidenceComponent implements OnInit {
   }
 
   open(content: any, obj: any) {
-    this.model.id = obj.id;
-    this.model.house = obj.house;
-    this.model.userId = obj.userId;
-    this.model.userName = obj.user_name;
-    this.model.rt = obj.rt;
-    this.model.rw = obj.rw;
-    this.model.note = obj.note;
+    this.model = obj;
     this.modalService.open(content, { size: 'md' });
   }
 

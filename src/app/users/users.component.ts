@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
   accessItems: any = [];
   model : any = new UsersModel(0,"","","",0);
   getId: any;
-
+  obj: any = [];
 
   constructor(
     private modalService: NgbModal,
@@ -73,12 +73,6 @@ export class UsersComponent implements OnInit {
 
   }
 
-  
-
-  onUpdateSubmit(){
-    
-  }
-
   onSubmit(){
     const body = {
       data : this.model,
@@ -90,7 +84,7 @@ export class UsersComponent implements OnInit {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
-       console.log(body); 
+       //console.log(data); 
        window.location.reload();
       },
       error => {
@@ -100,8 +94,8 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  obj: any = [];
-  open(content: any) {
+  open(content: any, obj:any) {
+    this.model = obj;
     this.modalService.open(content);
   }
 

@@ -1,0 +1,11 @@
+.table-form{
+   width: 100%;
+}
+
+.table-form tr td.label{
+   width: 15%;
+}
+
+.table-form tr td.input{
+   width: 80%;
+}
