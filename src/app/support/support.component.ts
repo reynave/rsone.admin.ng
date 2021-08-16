@@ -72,7 +72,9 @@ export class SupportComponent implements OnInit {
         console.log(data); 
         this.items = data['items'];
         $(document).ready(function() {
-          $('#example').DataTable();
+          $('#example').DataTable({
+            ordering:false,
+          });
         });
       },
       error => {
@@ -146,7 +148,7 @@ export class SupportComponent implements OnInit {
     this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl('https://forwards.or.id/admin.api/formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : ''));
     this.new_tab = 'https://forwards.or.id/admin.api/formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
     this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 10;
-    this.modalService.open(content, { size: 'lg' });
+    this.modalService.open(content, { size: 'xl' });
   }
 
 

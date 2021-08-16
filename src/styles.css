@@ -2,7 +2,85 @@
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 body{
   margin-top: 70px;
+  margin-bottom: 30px;
   }
+
+
+strong, b, h4{
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+.lh-0 {
+  line-height: 110%;
+}
+
+thead td {
+  font-weight: bold !important;
+  text-transform: uppercase;
+}
+
+.display-4 {
+  font-size: 26px;
+}
+
+.display td {
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px 3px!important;
+}
+
+.display thead th {
+  font-size: 11px;
+  padding: 1px 3px !important;
+  text-transform: uppercase;
+}
+
+tfoot th {
+  font-size: 12px;
+  padding: 1px 3px !important;
+  text-transform: uppercase;
+}
+ 
+
+.frame {
+  width: 131%;
+  min-height: 600px;
+  -ms-zoom: 0.75;
+  -moz-transform: scale(0.75);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.75);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.75);
+  -webkit-transform-origin: 0 0;
+}
+
+.table-sm td{
+  font-size: 12px;
+}
+
+.display-border td{
+  border: 1px solid #ccc;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+  background-color: #fbffff;;
+}
+ 
+.btn-sm{
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 12px;
+}
+
+
+.dataTables_wrapper .dataTables_filter input, .dataTables_wrapper .dataTables_length select { 
+  font-size: 13px !important;
+  padding: 2px 5px !important; 
+}
+
+ 
