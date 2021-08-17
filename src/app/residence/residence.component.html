@@ -67,7 +67,7 @@
              <td class="tg-0lax">RT/RW</td>
              <td class="tg-0lax">:</td>
              <td class="tg-0lax">
-                <select class="form-control" id="rt_rw_id" required [(ngModel)]="model.rt_rw_id" name="rt_rw_id" #rt_rw_id="ngModel">
+                <select class="custom-select" id="rt_rw_id" required [(ngModel)]="model.rt_rw_id" name="rt_rw_id" #rt_rw_id="ngModel">
                    <option *ngFor="let ui of rtrwItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rt_rw_id == ui.id">{{ui.no_rt+'/'+ui.no_rw}}</option>
                 </select>
                 <div [hidden]="userId.valid || userId.pristine" class="mt-2 text-danger">

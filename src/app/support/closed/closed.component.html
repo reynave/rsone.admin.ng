@@ -40,7 +40,7 @@
           <td>{{ item.request_name }}</td>
           <td>{{ item.subject }}</td>
           <td>{{ item.status_name }}</td>
-          <td>{{ item.input_date | date:'H/MM/yyyy H:mm:ss' }}</td>
+          <td>{{ item.input_date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
           <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalDetail, item); obj= item; getId = item.id;">Detail</a></td>
         </tr>
       </tbody>
@@ -120,72 +120,67 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <div class="form-group row">
-      <label for="text" class="col-4 col-form-label">CASE Number</label>
+    <div style="min-height: 460px;">
+      
+    <div class="row no-gutters mt-3">
       <div class="col-8">
-        <span>{{obj.ticketNumber}}</span>
+        <div class="ratio ratio-16x9">
+          <iframe [src]="iurl" class="frame" title="Dokumen" allowfullscreen></iframe>
+        </div>
       </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-      <label for="text" class="col-4 col-form-label">Title</label>
-      <div class="col-8">
-        <span>{{ obj.subject}}</span>
+      <div class="col-4">
+        <div class="border m-1">
+          <table class="table table-sm table-striped">
+            <tbody>
+              <tr>
+                <td>Form Category</td>
+                <Td>: </Td>
+                <td>
+                  <strong *ngIf="obj.supportFormId==1">Form General</strong>
+                  <strong *ngIf="obj.supportFormId==2">Form Izin</strong>
+                  <strong *ngIf="obj.supportFormId==3">Form Pengembalian</strong>
+                  <strong *ngIf="obj.supportFormId==4">Form Renovasi</strong>
+                </td>
+              </tr>
+              <tr>
+                <td width="35%">CASE Number</td>
+                <td width="1%">:</td>
+                <td> <span>{{obj.ticketNumber}}</span></td>
+              </tr>
+              <tr>
+                <td>Title</td>
+                <td>:</td>
+                <td>{{ obj.subject}}</td>
+              </tr>
+              <tr>
+                <td> Description </td>
+                <td>:</td>
+                <td>{{ obj.note}}</td>
+              </tr>
+              <tr>
+                <td>Request Name</td>
+                <td>:</td>
+                <td> {{obj.request_name}}</td>
+              </tr>
+              <tr>
+                <td>Created Date</td>
+                <td>:</td>
+                <td> {{obj.input_date}}</td>
+              </tr>
+              <tr>
+                <td>Status</td>
+                <Td>:</Td>
+                <td>Closed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-      <label for="textarea" class="col-4 col-form-label">Description</label>
-      <div class="col-8">
-        <span>{{ obj.note}}</span>
-      </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-      <label for="select" class="col-4 col-form-label">Status</label>
-      <div class="col-8">
-        <select *ngIf="obj.supportStatusId != 100" id="supportStatusId" name="supportStatusId" class="custom-select" required [(ngModel)]="model.supportStatusId" #supportStatusId="ngModel" [ngModelOptions]="{standalone: true}">
-            <option [value]="10" [selected]="model.supportStatusId == 10" value="10">Open</option>
-            <option [value]="11" [selected]="model.supportStatusId == 11" value="11">In-Progress</option>
-            <option [value]="100" [selected]="model.supportStatusId == 100" value="100">Closed</option>
-        </select>
-        <span *ngIf="obj.supportStatusId == 100">Closed</span>
-      </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-      <label for="select" class="col-4 col-form-label">Request Name</label>
-      <div class="col-8">
-        <span>{{obj.request_name}}</span>
-      </div> 
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="form-group row">
-      <label for="select" class="col-4 col-form-label">Created Date</label>
-      <div class="col-8">
-        <span>{{obj.input_date}}</span>
-      </div>
-    </div>
-    <p style="border-bottom: 1px solid #ced4da;"></p>
-    <div class="row mb-4">
-      <div class="col-6">
-        <strong *ngIf="obj.supportFormId==1">Form General</strong>
-        <strong *ngIf="obj.supportFormId==2">Form Izin</strong>
-        <strong *ngIf="obj.supportFormId==3">Form Pengembalian</strong>
-        <strong *ngIf="obj.supportFormId==4">Form Renovasi</strong>
-      </div>
-      <div class="col-6 text-right">
-        <a role="button" class="btn btn-primary btn-sm" (click)="goToLink(new_tab)"><i class="fas fa-print"></i> Print</a>
-      </div>
-    </div>
-    <div class="ratio ratio-16x9">
-      <iframe [src]="iurl" title="Dokumen" allowfullscreen></iframe>
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-    <button type="submit" class="btn btn-success" [disabled]="!myFormUpdate.form.valid">Update</button>
+    <button type="button" class="btn btn-primary" (click)="goToLink(new_tab)"><i class="fas fa-print"></i> Print</button>
   </div>
   </form>
 </ng-template>

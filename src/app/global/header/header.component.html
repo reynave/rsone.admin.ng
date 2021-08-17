@@ -18,13 +18,14 @@
                         <a class="nav-link  {{active == 'cms' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/cms' ]">Cms</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  {{active == 'users' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/users' ]">Users</a>
-                    </li> 
-                    <li class="nav-item">
                         <a class="nav-link  {{active == 'residence' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/residence' ]">Residence</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link  {{active == 'rt-rw' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/rt-rw' ]">RT/RW</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{active == 'users' || active == 'rt-rw' ? 'active':''}}" href="javascript:;" id="dropdown-mst" data-bs-toggle="dropdown" aria-expanded="false">Master Data</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown-mst">
+                            <a class="dropdown-item {{active == 'users' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/users' ]">Users</a>
+                            <a class="dropdown-item {{active == 'rt-rw' ? 'active':''}}" href="javascript:;" [routerLink]="[ '/rt-rw' ]">RT / RW</a>
+                        </div>
                     </li>
                 </ul>
                 <div class="text-right">

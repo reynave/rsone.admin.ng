@@ -45,7 +45,7 @@
             <td>{{ item.request_name }}</td>
             <td>{{ item.subject }}</td>
             <td>{{ item.status_name }}</td>
-            <td>{{ item.input_date | date:'H/MM/yyyy H:mm:ss' }}</td>
+            <td>{{ item.input_date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalDetail, item); obj= item; getId = item.id;">Detail</a></td>
           </tr>
         </tbody>
@@ -129,9 +129,7 @@
     <div style="min-height: 460px;">
       
     <div class="row no-gutters mt-3">
-
       <div class="col-8">
-
         <div class="ratio ratio-16x9">
           <iframe [src]="iurl" class="frame" title="Dokumen" allowfullscreen></iframe>
         </div>
@@ -205,8 +203,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 
     <div class="modal-footer">

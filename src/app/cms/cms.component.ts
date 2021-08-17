@@ -58,7 +58,9 @@ export class CmsComponent implements OnInit {
         console.log(data); 
         this.items =  data['items']; 
         $(document).ready(function() {
-          $('#example').DataTable();
+          $('#example').DataTable({
+            ordering:false,
+          });
         });
       },
       error => {
