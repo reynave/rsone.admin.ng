@@ -1,0 +1,20 @@
+<app-header></app-header>
+<main class="flex-shrink-0 text-center">
+  <div class="container-fluid">
+    <form class="form-signin" #myForm="ngForm" (ngSubmit)="onSubmit()">
+      <h5 class="h5 mb-3 font-weight-normal">API Link</h5>
+      <label for="inputPassword" class="sr-only text-sm">URL</label>
+      <input type="text" class="form-control form-control-sm" id="value" required [(ngModel)]="model.value" name="value" #value="ngModel">
+      <div [hidden]="value.valid || value.pristine" class="mt-2 text-danger">
+         url is required
+      </div>
+      <button class="btn btn-primary btn-block mt-2 mb-2" type="submit" [disabled]="!myForm.form.valid">Submit</button>
+      <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+         Updated!
+         <button type="button" class="close" (click)="success = false" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+    </form>
+  </div>
+</main>

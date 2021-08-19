@@ -22,6 +22,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { InprogressComponent } from './support/inprogress/inprogress.component';
 import { ClosedComponent } from './support/closed/closed.component';
 import { RtRwComponent } from './rt-rw/rt-rw.component';
+import { PanicButtonComponent } from './panic-button/panic-button.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RtRwComponent } from './rt-rw/rt-rw.component';
     ResidenceComponent,
     InprogressComponent,
     ClosedComponent,
-    RtRwComponent
+    RtRwComponent,
+    PanicButtonComponent
   ],
   imports: [
     BrowserModule,
