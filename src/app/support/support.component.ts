@@ -142,8 +142,8 @@ export class SupportComponent implements OnInit {
     else if(obj.supportFormId == 4){
        fro = 'renov';
     }
-    else if(obj.supportFormId == 1){
-       fro = 'deposit';
+    else{
+       fro = 'general';
     }
     this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl('https://forwards.or.id/admin.api/formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : ''));
     this.new_tab = 'https://forwards.or.id/admin.api/formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';

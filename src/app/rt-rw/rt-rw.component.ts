@@ -18,6 +18,17 @@ export class Model {
   ) { } 
 }
 
+export class EditModel {
+  constructor(
+    public id: number,
+    public no_rt: string,
+    public no_rw: string,
+    public rt_userId: number,
+    public rw_userId: number,
+    public userId: number
+  ) { } 
+}
+
 @Component({
   selector: 'app-rt-rw',
   templateUrl: './rt-rw.component.html',
@@ -27,6 +38,7 @@ export class RtRwComponent implements OnInit {
   items: any = [];  // open
   userItems: any = [];  // open
   model : any = new Model(0,"","",0,0,1);
+  editmodel : any = new Model(0,"","",0,0,1);
   obj: any = [];
 
   constructor(
@@ -81,17 +93,58 @@ export class RtRwComponent implements OnInit {
        headers: this.configService.headers()
     }).subscribe(
        data => {
-         //console.log(data); 
+         //console.log(data);
+         if(data['alert']!='') {
+             console.log(data['alert']);
+             alert(data['alert']);
+             false;
+         }
          window.location.reload(true);
        },
        error => {
          console.log(error);
     });
+  }
+
+  onUpdateSubmit(){
+    const body = {
+      data : this.editmodel,
+    }
+    
+    this.http.post<any>(environment.api + "rtrw/onUpdateSubmit", body, {
+       headers: this.configService.headers()
+    }).subscribe(
+       data => {
+         window.location.reload(true);
+       },
+       error => {
+         console.log(error);
+    });
+  }
+
+ cancel(){
+    this.model.no_rt = '';
+    this.model.no_rw = '';
+    this.model.rt_userId = 0;
+    this.model.rw_userId = 0;
+    this.modalService.dismissAll();
+ }
+
+ editcancel(){
+    this.editmodel.no_rt = '';
+    this.editmodel.no_rw = '';
+    this.editmodel.rt_userId = 0;
+    this.editmodel.rw_userId = 0;
+    this.modalService.dismissAll();
  }
 
  open(content: any, obj: any){
-    //if(obj.length > 0)
     this.model = obj;
+    this.modalService.open(content);
+ }
+
+ openedit(content: any, obj: any){
+    this.editmodel = obj;
     this.modalService.open(content);
  }
 
