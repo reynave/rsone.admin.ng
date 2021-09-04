@@ -45,7 +45,7 @@ export class BillingComponent implements OnInit {
         this.items =  data;
         this.items = this.items.filter((item: any) => {
            let result: any;
-           result = item[0] != 'NO' && item[0] != '';
+           result = item[0] != 'UNIT';
            return result;
         });
         $(document).ready(function() {

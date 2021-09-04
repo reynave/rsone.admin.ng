@@ -22,11 +22,7 @@
     <table id="example" class="display nowrap display-border" style="width:100%">
       <thead>
         <tr>
-          <th>No</th>
-          <th>Debtor A/C</th>
-          <th>Name</th>
-          <th>Tarif IPL OLD</th>
-          <th>Tarif IPL New (MAR'20)</th>
+          <th>UNIT</th>
           <th>Nov-2015</th>
           <th>Des-2015</th>
           <th>Jan-2016</th>
@@ -101,14 +97,17 @@
           <th>Okt-2021</th>
           <th>Nov-2021</th>
           <th>Des-2021</th>
+
         </tr>
       </thead>
       <tbody>
          <ng-container *ngIf="items">
             <tr *ngFor="let item of items; let i = index;">
                 <td>{{item[0]}}</td>
-                <td>{{item[1]}}</td>
-                <td>{{item[2]}}</td>
+                <td class="text-right">{{item[1] | number}}</td>
+                <td class="text-right">{{item[2] | number}}</td>
+                <td class="text-right">{{item[3] | number}}</td>
+                <td class="text-right">{{item[4] | number}}</td>
                 <td class="text-right">{{item[5] | number}}</td>
                 <td class="text-right">{{item[6] | number}}</td>
                 <td class="text-right">{{item[7] | number}}</td>
@@ -179,12 +178,6 @@
                 <td class="text-right">{{item[72] | number}}</td>
                 <td class="text-right">{{item[73] | number}}</td>
                 <td class="text-right">{{item[74] | number}}</td>
-                <td class="text-right">{{item[75] | number}}</td>
-                <td class="text-right">{{item[76] | number}}</td>
-                <td class="text-right">{{item[77] | number}}</td>
-                <td class="text-right">{{item[78] | number}}</td>
-                <td class="text-right">{{item[79] | number}}</td>
-                <td class="text-right">{{item[80] | number}}</td>
             </tr>
          </ng-container>
       </tbody>
