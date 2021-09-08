@@ -13,6 +13,7 @@ export class Model {
     public id: number,
     public house: string,
     public userId: number,
+    public virtual_account: string,
     public userName: string,
     public rt_rw_id: number
   ) { } 
@@ -29,7 +30,7 @@ export class ResidenceComponent implements OnInit {
 
   items: any = [];
   loading: boolean = false;
-  model : any = new Model(0,"",0,"",0);
+  model : any = new Model(0,"",0,"","",0);
   userItems: any = [];
   rtrwItems: any = [];
   obj: any;
@@ -104,6 +105,25 @@ export class ResidenceComponent implements OnInit {
       data => { 
        console.log(data); 
        window.location.reload();
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+  }
+
+  changeWarga()
+  {
+    const body = {
+      data : this.model.userId,
+    }
+    
+    this.http.post<any>(environment.api + "residence/getVA", body, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => {
+       this.model.virtual_account = data['item'];
       },
       error => {
         console.log(error);

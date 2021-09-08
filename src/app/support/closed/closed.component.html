@@ -2,49 +2,54 @@
 
 <main class="flex-shrink-0">
   <div class="container-fluid">
-
-           <ul class="nav nav-tabs">
-              <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="javascript:;" [routerLink]="[ '/support' ]">Open</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="javascript:;" [routerLink]="[ '/support/inprogress' ]">In-progress</a>
-              </li>
-              <li class="nav-item">
-                   <a class="nav-link active" href="javascript:;">Closed</a>
-              </li>
-          </ul>
-
-    <div class="row mb-4 mt-4">
-      <div class="col-6">
-        <strong>SUPPORT</strong>
-      </div>
-      <div class="col-6 text-right">
-        <a role="button" class="btn btn-primary btn-sm" (click)="open(modalNewRequest,[])">Create New Request</a>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <strong>Support</strong>
       </div>
     </div>
-    <table id="example" class="display" style="width:100%">
-      <thead>
-        <tr>
-          <th>Case Number</th>
-          <th>Name Request</th>
-          <th>Title</th>
-          <th>Status</th>
-          <th>Created Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of items;">
-          <td>{{ item.ticketNumber }}</td>
-          <td>{{ item.request_name }}</td>
-          <td>{{ item.subject }}</td>
-          <td>{{ item.status_name }}</td>
-          <td>{{ item.input_date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
-          <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalDetail, item); obj= item; getId = item.id;">Detail</a></td>
-        </tr>
-      </tbody>
-    </table>
+    <ul class="nav nav-tabs">
+       <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="javascript:;" [routerLink]="[ '/support' ]">Open</a>
+       </li>
+       <li class="nav-item">
+           <a class="nav-link" href="javascript:;" [routerLink]="[ '/support/inprogress' ]">In-progress</a>
+       </li>
+       <li class="nav-item">
+             <a class="nav-link active" href="javascript:;">Closed</a>
+       </li>
+    </ul>
+
+    <div class="my-3">
+      <table id="example" class="display excel border" style="width:100%">
+        <thead>
+          <tr>
+            <th>Case Number</th>
+            <td>Form</td>
+            <th>Name Request</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Created Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items;">
+            <td>{{ item.ticketNumber }}</td>
+            <td>
+              <span *ngIf="item.supportFormId==1"> General</span>
+              <span *ngIf="item.supportFormId==2"> Izin</span>
+              <span *ngIf="item.supportFormId==3"> Pengembalian</span>
+              <span *ngIf="item.supportFormId==4"> Renovasi</span>
+            </td>
+            <td>{{ item.request_name }}</td>
+            <td>{{ item.subject }}</td>
+            <td>{{ item.status_name }}</td>
+            <td>{{ item.input_date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+            <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalDetail, item); obj= item; getId = item.id;">Detail</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </main>
 
@@ -70,7 +75,7 @@
       <div class="form-group row">
         <label for="textarea" class="col-4 col-form-label">Note</label>
         <div class="col-8">
-          <textarea id="note" name="note" required [(ngModel)]="model.note" cols="40" rows="5" class="form-control" #note="ngModel"></textarea> 
+          <textarea id="note" name="note" required [(ngModel)]="model.note" cols="40" rows="5" class="form-control" #note="ngModel"></textarea>
           <div [hidden]="note.valid || note.pristine" class="mt-2 text-danger">
             subject is required
           </div>
@@ -80,9 +85,9 @@
         <label for="select" class="col-4 col-form-label">Form Support Type</label>
         <div class="col-8">
           <select id="supportFormId" name="supportFormId" class="custom-select" required [(ngModel)]="model.supportFormId" #supportFormId="ngModel">
-          <option [value]="1" [selected]="model.supportFormId == 1" value="1">General</option>
-          <option [value]="2" [selected]="model.supportFormId == 2" value="2">Izin</option>
-          <option [value]="4" [selected]="model.supportFormId == 4" value="4">Renovasi</option>
+            <option [value]="1" [selected]="model.supportFormId == 1" value="1">General</option>
+            <option [value]="2" [selected]="model.supportFormId == 2" value="2">Izin</option>
+            <option [value]="4" [selected]="model.supportFormId == 4" value="4">Renovasi</option>
           </select>
         </div>
       </div>
@@ -90,8 +95,8 @@
         <label for="select" class="col-4 col-form-label">Status</label>
         <div class="col-8">
           <select id="supportStatusId" name="supportStatusId" class="custom-select" required [(ngModel)]="model.supportStatusId" #supportStatusId="ngModel">
-          <option [value]="10" [selected]="model.supportStatusId == 10" value="10">Open</option>
-          <!--<option value="2">In-Progress</option>
+            <option [value]="10" [selected]="model.supportStatusId == 10" value="10">Open</option>
+            <!--<option value="2">In-Progress</option>
           <option value="100">Closed</option>-->
           </select>
         </div>
@@ -114,12 +119,12 @@
 
 <ng-template #modalDetail let-modal>
   <form (ngSubmit)="onUpdateSubmit()" #myFormUpdate="ngForm">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title-detail">Detail Support Request</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+    <div class="modal-header">
+      <b class="modal-title" id="modal-basic-title-detail">Detail Support Request</b>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <div style="min-height: 460px;">
       
     <div class="row no-gutters mt-3">
@@ -132,6 +137,7 @@
         <div class="border m-1">
           <table class="table table-sm table-striped">
             <tbody>
+
               <tr>
                 <td>Form Category</td>
                 <Td>: </Td>
@@ -147,6 +153,7 @@
                 <td width="1%">:</td>
                 <td> <span>{{obj.ticketNumber}}</span></td>
               </tr>
+             
               <tr>
                 <td>Title</td>
                 <td>:</td>
@@ -157,30 +164,51 @@
                 <td>:</td>
                 <td>{{ obj.note}}</td>
               </tr>
+
               <tr>
                 <td>Request Name</td>
                 <td>:</td>
                 <td> {{obj.request_name}}</td>
               </tr>
+
               <tr>
                 <td>Created Date</td>
                 <td>:</td>
                 <td> {{obj.input_date}}</td>
               </tr>
+
+              <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
+                <td>Divisi Keamanan</td>
+                <td>:</td>
+                <td>{{model.scUser}}</td>
+              </tr>
+              <tr *ngIf="obj.supportFormId == 4"><!-- renov -->
+                <td>Building Control</td>
+                <td>:</td>
+                <td>{{model.bcUser}}</td>
+              </tr>
+              <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
+                <td>RT</td>
+                <td>:</td>
+                <td>{{model.rtUser}}</td>
+              </tr>
+
               <tr>
                 <td>Status</td>
                 <Td>:</Td>
-                <td>Closed</td>
+                <td>Closed</td> 
               </tr>
             </tbody>
+
           </table>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="goToLink(new_tab)"><i class="fas fa-print"></i> Print</button>
-  </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="goToLink(new_tab)"><i class="fas fa-print"></i> Print</button>
+    </div>
   </form>
 </ng-template>

@@ -12,8 +12,12 @@ export class Model {
     public id: number,
     public no_rt: string,
     public no_rw: string,
+    public unit_rt: string,
+    public unit_rw: string,
     public rt_userId: number,
     public rw_userId: number,
+    public rt_username: string,
+    public rw_username: string,
     public userId: number
   ) { } 
 }
@@ -23,8 +27,12 @@ export class EditModel {
     public id: number,
     public no_rt: string,
     public no_rw: string,
+    public unit_rt: string,
+    public unit_rw: string,
     public rt_userId: number,
     public rw_userId: number,
+    public rt_username: string,
+    public rw_username: string,
     public userId: number
   ) { } 
 }
@@ -36,9 +44,13 @@ export class EditModel {
 })
 export class RtRwComponent implements OnInit {
   items: any = [];  // open
+  resItems: any = [];
+  rwItems: any = [];
   userItems: any = [];  // open
-  model : any = new Model(0,"","",0,0,1);
-  editmodel : any = new Model(0,"","",0,0,1);
+  userRTItems: any = [];
+  userRWItems: any = [];
+  model : any = new Model(0,"","","","",0,0,"","",1);
+  editmodel : any = new EditModel(0,"","","","",0,0,"","",1);
   obj: any = [];
 
   constructor(
@@ -53,6 +65,30 @@ export class RtRwComponent implements OnInit {
   }
 
   getHttp() {
+
+    this.http.get<any>(environment.api + "users/all_rt", {
+        headers: this.configService.headers()
+    }).subscribe(
+        data => {  
+          this.userRTItems = data['items'];
+        },
+        error => {
+          console.error(error);
+          alert(error);
+        },
+    );
+
+    this.http.get<any>(environment.api + "users/all_rw", {
+        headers: this.configService.headers()
+    }).subscribe(
+        data => {  
+          this.userRWItems = data['items'];
+        },
+        error => {
+          console.error(error);
+          alert(error);
+        },
+    );
 
     this.http.get<any>(environment.api + "users/all", {
         headers: this.configService.headers()
@@ -82,6 +118,18 @@ export class RtRwComponent implements OnInit {
         console.log(error);
       },
     );
+
+    this.http.get<any>(environment.api + "residence/index", {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => {  
+        this.resItems = data['items'];
+      },
+      error => {
+        console.log(error);
+      },
+    );
+
   }
 
   onSubmit(){
@@ -148,5 +196,38 @@ export class RtRwComponent implements OnInit {
     this.modalService.open(content);
  }
 
+  setfromRes1(house:string){
+    this.http.get<any>(environment.api + "residence/getResdata/"+house, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+        this.model.rt_userId = data['items'][0]['userId'];
+        this.model.rt_username = data['items'][0]['name'];
+        this.editmodel.rt_userId = data['items'][0]['userId'];
+        this.editmodel.rt_username = data['items'][0]['name'];
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+  }
+
+  setfromRes2(house:string){
+    this.http.get<any>(environment.api + "residence/getResdata/"+house, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+        this.model.rw_userId = data['items'][0]['userId'];
+        this.model.rw_username = data['items'][0]['name'];
+        this.editmodel.rw_userId = data['items'][0]['userId'];
+        this.editmodel.rw_username = data['items'][0]['name'];
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+  }
 
 }

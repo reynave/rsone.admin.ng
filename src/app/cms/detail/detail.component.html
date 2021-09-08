@@ -3,6 +3,11 @@
   <div class="container-fluid">
     <form (ngSubmit)="onSubmit()" #myForm="ngForm">
       <h5>{{model.id == '' ? 'New' : 'Edit' }} CMS</h5>
+<div class="text-right">
+                <a role="button" class="btn btn-outline-secondary" href="javascript:;" (click)="back()">Cancel</a>
+                &nbsp;
+                <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
+</div>
      <table class="tg">
         <tbody>
           <tr>
@@ -16,12 +21,48 @@
             </td>
           </tr>
           <tr>
+            <td class="tg-0pky w-25 text-right">Information Type</td>
+            <td class="tg-0pky w-1">:</td>
+            <td class="tg-0pky w-74">
+               <select id="id_content_category" name="id_content_category" class="custom-select" required [(ngModel)]="model.id_content_category" #id_content_category="ngModel">
+                   <option *ngFor="let ai of categoryItems" [value]="ai.id" [selected]="model.id_content_category == ai.id" value="ai.id">{{ai.name}}</option>
+               </select>
+               <div [hidden]="id_content_category.valid || id_content_category.pristine" class="mt-2 text-danger">
+                 jenis informasi is required
+               </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="tg-0pky w-25 text-right">Start date</td>
+            <td class="tg-0pky w-1">:</td>
+            <td class="tg-0pky w-74">
+               <div class="row">
+                    <div class="col-5">
+                        <input type="date" class="form-control" id="start_date" required [(ngModel)]="model.start_date" name="start_date" #start_date="ngModel">
+                        <div [hidden]="start_date.valid || start_date.pristine" class="mt-2 text-danger">
+                           start date is required
+                        </div>
+                    </div>
+                    <div class="col-7 row">
+                        <label class="col-3 col-form-label">End date : </label>
+                        <div class="col-9">
+                            <input type="date" class="form-control" id="end_date" required [(ngModel)]="model.end_date" name="end_date" #end_date="ngModel">
+                            <div [hidden]="end_date.valid || end_date.pristine" class="mt-2 text-danger">
+                               end date is required
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </td>
+          </tr>
+          <tr>
             <td class="tg-0pky w-25 text-right">Status</td>
             <td class="tg-0pky w-1">:</td>
             <td class="tg-0pky w-74">
                <select id="status" name="status" class="custom-select" required [(ngModel)]="model.status" #status="ngModel">
                     <option [value]="0" [selected]="model.status == 0" value="0">Draft</option>
                     <option [value]="1" [selected]="model.status == 1" value="1">Published</option>
+                    <option [value]="2" [selected]="model.status == 2" value="2">Unpublished</option>
                </select>
             </td>
           </tr>
@@ -35,14 +76,11 @@
                </div>
             </td>
           </tr>
-          <tr>
+          <!--<tr>
               <td colspan="2"></td>
               <td colspan="3">
-                <a role="button" class="btn btn-outline-secondary" href="javascript:;" (click)="back()">Cancel</a>
-                &nbsp;
-                <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
               </td>
-          </tr>
+          </tr>-->
         </tbody>
      </table>
     </form>

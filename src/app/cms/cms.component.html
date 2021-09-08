@@ -13,18 +13,24 @@
       <thead>
         <tr>
           <th>Title</th>
+          <th>Information Type</th>
           <th>Status</th>
           <th>Created By</th>
           <th>Created Date</th>
+          <th>Start Date</th>
+          <th>End Date</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of items">
           <td>{{ item.name }}</td>
-          <td>{{ item.status == 0 ? 'Draft' : 'Published' }}</td>
+          <td>{{ item.content_category }}</td>
+          <td>{{ cmsStatus(item.status) }}</td>
           <td>{{ item.user_name }}</td>
           <td>{{ item.input_date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ item.start_date | date:'dd/MM/yyyy' }}</td>
+          <td>{{ item.end_date | date:'dd/MM/yyyy' }}</td>
           <td><a role="button" class="btn btn-primary btn-sm" href="javascript:;" (click)="cms_detail(item.id)">Detail</a></td>
           <!--<td><a role="button" class="btn btn-primary btn-sm" href="javascript:;" [routerLink]="['/cms/detail', item.id]">Detail</a></td>--><!-- (click)="open(modalDetail,item); obj = item; getId = item.id;" -->
         </tr>

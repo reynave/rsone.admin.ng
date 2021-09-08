@@ -13,6 +13,10 @@ export class UsersModel {
     public name: string,
     public status: string,
     public id_user_access: number,
+    public virtual_account: string,
+    public residence_status: string,
+    public house: string,
+    public username: string,
   ) { } 
 }
 
@@ -24,8 +28,9 @@ export class UsersModel {
 export class UsersComponent implements OnInit {
 
   items: any = [];
+  resItems: any = [];
   accessItems: any = [];
-  model : any = new UsersModel(0,"","","",0);
+  model : any = new UsersModel(0,"","","",0,"","","","");
   getId: any;
   obj: any = [];
 
@@ -46,7 +51,7 @@ export class UsersComponent implements OnInit {
       data => { 
         this.items =  data['items']; 
         $(document).ready(function() {
-          $('#example-user').DataTable({"lengthMenu":[ [250,500],[250,500]],"ordering": false,"scrollX": true});
+          $('#example-user').DataTable({"lengthMenu":[ [250,500,1000],[250,500,1000]],"ordering": true,"scrollX": true});
         } );
       },
       error => {
@@ -71,6 +76,17 @@ export class UsersComponent implements OnInit {
 
     );
 
+    this.http.get<any>(environment.api + "residence/index", {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => {  
+        this.resItems = data['items'];
+      },
+      error => {
+        console.log(error);
+      },
+    );
+
   }
 
   onSubmit(){
@@ -92,6 +108,60 @@ export class UsersComponent implements OnInit {
       },
 
     );
+  }
+
+  resetPassword()
+  {
+    const body = {
+      data : this.model,
+    }
+
+    console.log(body);
+    
+    this.http.post<any>(environment.api + "users/reset_password", body, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+       console.log(data);
+       window.alert('User '+this.model.name+ ' has been successfully reset password!');
+       window.location.reload();
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+  }
+
+  setfromRes(){
+    this.http.get<any>(environment.api + "residence/getResdata/"+this.model.house, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+        this.model.username = this.model.house;
+        this.model.name = data['items'][0]['name']; 
+        this.model.email = data['items'][0]['email']; 
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+  }
+
+  delete_user(id: number){
+    if(confirm('Are you sure?')){
+    this.http.get<any>(environment.api + "residence/delete_user/"+id, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+    }
   }
 
   open(content: any, obj:any) {

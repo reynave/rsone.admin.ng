@@ -10,7 +10,9 @@
       <thead>
         <tr>
           <th>House</th>
-          <th>User</th>
+          <th>ID Warga</th>
+          <th>Warga</th>
+          <th>Virtual Account</th>
           <th>No. RT</th>
           <th>No. RW</th>
           <th>RT</th>
@@ -21,7 +23,9 @@
       <tbody>
         <tr *ngFor="let item of items">
           <td>{{item.house}}</td>
+          <td>{{item.userId}}</td>
           <td>{{item.user_name}}</td>
+          <td>{{item.virtual_account}}</td>
           <td>{{item.no_rt}}</td>
           <td>{{item.no_rw}}</td>
           <td>{{item.rt_user}}</td>
@@ -45,22 +49,36 @@
        <table class="tg">
          <tbody>
            <tr>
-             <td class="tg-0lax">House</td>
+             <td class="tg-0lax" style="width: 30%">House</td>
              <td class="tg-0lax">:</td>
              <td class="tg-0lax">
                 <input type="text" class="form-control" readonly id="house" required [(ngModel)]="model.house" name="house" #house="ngModel">
              </td>
           </tr>
           <tr>
-             <td class="tg-0lax">User</td>
+             <td class="tg-0lax">ID Warga</td>
              <td class="tg-0lax">:</td>
              <td class="tg-0lax">
-                <select class="form-control" id="userId" required [(ngModel)]="model.userId" name="userId" #userId="ngModel">
+                <input type="text" readonly class="form-control-plaintext" [(ngModel)]="model.userId" name="userId" #userId="ngModel" value="{{model.userId}}">
+             </td>
+          </tr>
+          <tr>
+             <td class="tg-0lax">Warga</td>
+             <td class="tg-0lax">:</td>
+             <td class="tg-0lax">
+                <select class="form-control" id="userId" required [(ngModel)]="model.userId" name="userId" #userId="ngModel" (change)="changeWarga()">
                    <option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.userId == ui.id">{{ui.name}}</option>
                 </select>
                 <div [hidden]="userId.valid || userId.pristine" class="mt-2 text-danger">
-                    user is required
+                    warga is required
                 </div>
+             </td>
+          </tr>
+          <tr>
+             <td class="tg-0lax">Virtual Account</td>
+             <td class="tg-0lax">:</td>
+             <td class="tg-0lax">
+                <input type="text" readonly class="form-control-plaintext" [(ngModel)]="model.virtual_account" name="virtual_account" #virtual_account="ngModel" value="{{model.virtual_account}}">
              </td>
           </tr>
           <tr>

@@ -11,6 +11,9 @@ declare var tinymce: any;
 export class Model {
   constructor(
     public id: number,
+    public id_content_category: number,
+    public start_date: string,
+    public end_date: string,
     public name: string,
     public content: string,
     public status: number,
@@ -25,8 +28,9 @@ export class Model {
 export class DetailComponent implements OnInit {
 
   items: any = [];
+  categoryItems: any = [];
   obj: any = [];
-  model: any = new Model(0,"","",0);
+  model: any = new Model(0,0,"","","","",0);
   getId: any;
   config: any = {
      height: 300,
@@ -51,6 +55,18 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHttp();
+    this.http.get<any>(environment.api + "content/content_category", {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+        console.log(data); 
+        this.categoryItems =  data['items']; 
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
   }
 
   getHttp() {
@@ -62,15 +78,11 @@ export class DetailComponent implements OnInit {
       data => { 
         console.log(data); 
         this.items = data;
-        this.model.id = this.items['id'];
-        this.model.status = this.items['status'];
-        this.model.name = this.items['name'];
-        this.model.content = this.items['content'];
+        this.model = data;
       },
       error => {
         console.log(error);
       },
-
     );
     }
   }

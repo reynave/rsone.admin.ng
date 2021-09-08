@@ -16,6 +16,9 @@ export class Model {
     public note: string,
     public supportStatusId: number,
     public supportFormId: number,
+    public bcUser: string,
+    public rwUser: string,
+    public scUser: string,
     public userId: number
   ) { } 
 }
@@ -29,13 +32,17 @@ export class Model {
 export class SupportComponent implements OnInit {
   items: any = [];  // open
   userItems: any = [];  // open
-  model : any = new Model(0,"","","",0,0,1);
+  model : any = new Model(0,"","","",0,0,"","","",1);
   getId: any;
   obj: any = [];
   //iurl: string;
   tab1: boolean = true;
   tab2: boolean = false;
   tab3: boolean = false;
+  scList: any = []; // Security
+  rtList: any = []; // RT
+  rwList: any = []; // RT
+  bcList: any = []; // Building Control
 
   constructor(
     private modalService: NgbModal,
@@ -58,6 +65,42 @@ export class SupportComponent implements OnInit {
     }).subscribe(
         data => {  
           this.userItems = data['items'];
+        },
+        error => {
+          console.error(error);
+          alert(error);
+        },
+    );
+
+    this.http.get<any>(environment.api + "users/all_sc", {
+        headers: this.configService.headers()
+    }).subscribe(
+        data => {  
+          this.scList = data['items'];
+        },
+        error => {
+          console.error(error);
+          alert(error);
+        },
+    );
+
+    this.http.get<any>(environment.api + "users/all_rt", {
+        headers: this.configService.headers()
+    }).subscribe(
+        data => {  
+          this.rtList = data['items'];
+        },
+        error => {
+          console.error(error);
+          alert(error);
+        },
+    );
+
+    this.http.get<any>(environment.api + "users/all_bc", {
+        headers: this.configService.headers()
+    }).subscribe(
+        data => {  
+          this.bcList = data['items'];
         },
         error => {
           console.error(error);
@@ -108,7 +151,8 @@ export class SupportComponent implements OnInit {
   onUpdateSubmit(){
 
     const body = {
-      data : { id : this.getId, supportStatusId : this.model.supportStatusId }, // 
+      //data : { id : this.getId, ticketNumber : this.model.ticketNumber, supportStatusId : this.model.supportStatusId, supportFormId : this.model.supportFormId }, // 
+      data : this.model
     }
 
     console.log(body);
@@ -145,11 +189,20 @@ export class SupportComponent implements OnInit {
     else{
        fro = 'general';
     }
-    this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl('https://forwards.or.id/admin.api/formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : ''));
-    this.new_tab = 'https://forwards.or.id/admin.api/formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
-    this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 10;
+    this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl('https://forwards.or.id/admin.api.uat/formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : ''));
+    this.new_tab = 'https://forwards.or.id/admin.api.uat/formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
+    //this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 10;
+    this.model = obj;
+    if(obj.supportFormId == 2){
+       this.model.scUser = this.model.f17; // Security
+       this.model.rtUser = this.model.f18; // RT User
+    }
+    else if(obj.supportFormId == 4){
+       this.model.scUser = this.model.f15; // Security
+       this.model.bcUser = this.model.f17; // RT User
+       this.model.rtUser = this.model.f19; // RT User
+    }
     this.modalService.open(content, { size: 'xl' });
+
   }
-
-
 }

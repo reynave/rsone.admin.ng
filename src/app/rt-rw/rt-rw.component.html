@@ -23,8 +23,8 @@
         <tr *ngFor="let item of items">
           <td>{{item.no_rt}}</td>
           <td>{{item.no_rw}}</td>
-          <td>{{item.rt_user}}</td>
-          <td>{{item.rw_user}}</td>
+          <td>{{item.rt_username}}</td>
+          <td>{{item.rw_username}}</td>
           <td><a role="button" class="btn btn-primary btn-sm" (click)="openedit(modalEditForm, item); obj = item;">Detail</a></td>
         </tr>
       </tbody>
@@ -65,27 +65,40 @@
 	    </td>
 	  </tr>
 	  <tr>
-	    <td class="label p-2">RT</td>
+	    <td class="label p-2">Ketua RT</td>
 	    <td class="p-2">:</td>
 	    <td class="input p-2">
-	      <select class="form-control" id="rt_userId" required [(ngModel)]="model.rt_userId" name="rt_userId" #rt_userId="ngModel">
-		<option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rt == ui.id">{{ui.name}}</option>
+	      <select class="form-control" id="unit_rt" required [(ngModel)]="model.unit_rt" name="unit_rt" #unit_rt="ngModel" (change)="setfromRes1(model.unit_rt)">
+		<option *ngFor="let ui of resItems" value="{{ui.house}}" [value]="ui.house">{{ui.house}}</option>
 	      </select>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="label p-2">Nama Ketua RT</td>
+	    <td class="p-2">:</td>
+	    <td class="input p-2">
+	      <input class="form-control" type="hidden" id="rt_userId" required [(ngModel)]="model.rt_userId" name="rt_userId" #rt_userId="ngModel">
+	      <input class="form-control" type="text" id="rt_username" required [(ngModel)]="model.rt_username" name="rt_username" #rt_username="ngModel" value="">
 	      <div [hidden]="rt_userId.valid || rt_userId.pristine" class="mt-2 text-danger">
 		 rt is required
 	      </div>
 	    </td>
 	  </tr>
 	  <tr>
-	    <td class="label p-2">RW</td>
+	    <td class="label p-2">Ketua RW</td>
 	    <td class="p-2">:</td>
 	    <td class="input p-2">
-	       <select class="form-control" id="rw_userId" required [(ngModel)]="model.rw_userId" name="rw_userId" #rw_userId="ngModel">
-		<option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rw == ui.id">{{ui.name}}</option>
-	       </select>
-	       <div [hidden]="rw_userId.valid || rw_userId.pristine" class="mt-2 text-danger">
-		 rw is required
-	       </div>
+	      <select class="form-control" id="unit_rw" required [(ngModel)]="model.unit_rw" name="unit_rw" #unit_rw="ngModel" (change)="setfromRes2(model.unit_rw)">
+		<option *ngFor="let ui of resItems" value="{{ui.house}}" [value]="ui.house">{{ui.house}}</option>
+	      </select>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="label p-2">Nama Ketua RW</td>
+	    <td class="p-2">:</td>
+	    <td class="input p-2">
+	      <input class="form-control" type="hidden" id="rw_userId" required [(ngModel)]="model.rw_userId" name="rw_userId" #rw_userId="ngModel">
+	      <input class="form-control" type="text" id="rw_username" required [(ngModel)]="model.rw_username" name="rw_username" #rw_username="ngModel">
 	    </td>
 	  </tr>
 	</tbody>
@@ -133,27 +146,40 @@
 	    </td>
 	  </tr>
 	  <tr>
-	    <td class="label p-2">RT</td>
+	    <td class="label p-2">Ketua RT</td>
 	    <td class="p-2">:</td>
 	    <td class="input p-2">
-	      <select class="form-control" id="rt_userId" required [(ngModel)]="editmodel.rt_userId" name="rt_userId" #rt_userId="ngModel">
-		<option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="editmodel.rt == ui.id">{{ui.name}}</option>
+	      <select class="form-control" id="unit_rt" required [(ngModel)]="editmodel.unit_rt" name="unit_rt" #unit_rt="ngModel" (change)="setfromRes1(model.unit_rt)">
+		<option *ngFor="let ui of resItems" value="{{ui.house}}" [value]="ui.house">{{ui.house}}</option>
 	      </select>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="label p-2">Nama Ketua RT</td>
+	    <td class="p-2">:</td>
+	    <td class="input p-2">
+	      <input class="form-control" type="hidden" id="rt_userId" required [(ngModel)]="model.rt_userId" name="rt_userId" #rt_userId="ngModel">
+	      <input class="form-control" type="text" id="rt_username" required [(ngModel)]="editmodel.rt_username" name="rt_username" #rt_username="ngModel">
 	      <div [hidden]="rt_userId.valid || rt_userId.pristine" class="mt-2 text-danger">
 		 rt is required
 	      </div>
 	    </td>
 	  </tr>
 	  <tr>
-	    <td class="label p-2">RW</td>
+	    <td class="label p-2">Ketua RW</td>
 	    <td class="p-2">:</td>
 	    <td class="input p-2">
-	       <select class="form-control" id="rw_userId" required [(ngModel)]="editmodel.rw_userId" name="rw_userId" #rw_userId="ngModel">
-		<option *ngFor="let ui of userItems" value="{{ui.id}}" [value]="ui.id" [selected]="editmodel.rw == ui.id">{{ui.name}}</option>
-	       </select>
-	       <div [hidden]="rw_userId.valid || rw_userId.pristine" class="mt-2 text-danger">
-		 rw is required
-	       </div>
+	      <select class="form-control" id="unit_rw" required [(ngModel)]="editmodel.unit_rw" name="unit_rw" #unit_rw="ngModel" (change)="setfromRes2(model.unit_rw)">
+		<option *ngFor="let ui of resItems" value="{{ui.house}}" [value]="ui.house">{{ui.house}}</option>
+	      </select>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td class="label p-2">Nama Ketua RW</td>
+	    <td class="p-2">:</td>
+	    <td class="input p-2">
+	      <input class="form-control" type="hidden" id="rw_userId" required [(ngModel)]="model.rw_userId" name="rw_userId" #rw_userId="ngModel">
+	      <input class="form-control" type="text" id="rw_username" required [(ngModel)]="editmodel.rw_username" name="rw_username" #rw_username="ngModel">
 	    </td>
 	  </tr>
 	</tbody>

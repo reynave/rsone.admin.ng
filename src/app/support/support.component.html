@@ -7,7 +7,6 @@
         <strong>Support</strong>
       </div>
     </div>
-
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="javascript:;">Open</a>
@@ -178,6 +177,34 @@
                 <td> {{obj.input_date}}</td>
               </tr>
 
+              <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
+                <td>Divisi Keamanan</td>
+                <td>:</td>
+                <td>
+                  <select id="scUser" name="scUser" class="form-control form-control-sm" required [(ngModel)]="model.scUser" #scUser="ngModel" [ngModelOptions]="{standalone: true}">
+                     <option *ngFor="let sc of scList" value="{{sc.name}}" [value]="sc.name">{{sc.name}}</option>
+                  </select>
+               </td>
+              </tr>
+              <tr *ngIf="obj.supportFormId == 4"><!-- renov -->
+                <td>Building Control</td>
+                <td>:</td>
+                <td>
+                  <select id="bcUser" name="bcUser" class="form-control form-control-sm" required [(ngModel)]="model.bcUser" #bcUser="ngModel" [ngModelOptions]="{standalone: true}">
+                     <option *ngFor="let bc of bcList" value="{{bc.name}}" [value]="bc.name">{{bc.name}}</option>
+                  </select>
+                </td>
+              </tr>
+              <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
+                <td>RT</td>
+                <td>:</td>
+                <td>
+                  <select id="rtUser" name="rtUser" class="form-control form-control-sm" required [(ngModel)]="model.rtUser" #rtUser="ngModel" [ngModelOptions]="{standalone: true}">
+                     <option *ngFor="let rt of rtList" value="{{rt.name}}" [value]="rt.name">{{rt.name}}</option>
+                  </select>
+                </td>
+              </tr>
+
               <tr>
                 <td>Status</td>
                 <Td>:</Td>
@@ -187,9 +214,9 @@
                     <option [value]="11" [selected]="obj.supportStatusId == 11" value="11">In-Progress</option>
                     <option [value]="100" [selected]="obj.supportStatusId == 100" value="100">Closed</option>
                   </select>
-
                 </td> 
               </tr>
+
               <tr>
                 <td></td>
                 <td></td>

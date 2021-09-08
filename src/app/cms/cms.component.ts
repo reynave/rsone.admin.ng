@@ -126,6 +126,14 @@ export class CmsComponent implements OnInit {
     );
   }
 
+  cmsStatus(param: number){
+     let txt = '';
+     if(param == 0) { txt = 'Draft'; }
+     else if(param == 1) { txt = 'Published'; }
+     else if(param == 2) { txt = 'Unpublished'; }
+     return txt;
+  }
+
   open(content: any, obj: any) {
     this.model.id = obj.id;
     this.model.status = obj.status;
