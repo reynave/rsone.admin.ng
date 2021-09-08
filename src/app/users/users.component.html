@@ -140,26 +140,7 @@
 </table>
     </div>
     <div class="modal-footer">
-             <button type="button" class="btn btn-primary text-left" (click)="resetPassword()">Reset password</button>
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
-             &nbsp;
+            <button *ngIf="model.id != 0" type="button" class="btn btn-primary btn-left-position" (click)="resetPassword()">Reset password</button>
              &nbsp;
              <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
              &nbsp;

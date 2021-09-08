@@ -100,11 +100,12 @@ export class UsersComponent implements OnInit {
       headers: this.configService.headers()
     }).subscribe(
       data => { 
-       //console.log(data); 
+       console.log(data);
        window.location.reload();
       },
       error => {
-        console.log(error);
+        console.error(error);
+        alert("This username "+this.model.username+" already exist. Please select another username.");
       },
 
     );
@@ -140,7 +141,8 @@ export class UsersComponent implements OnInit {
       data => { 
         this.model.username = this.model.house;
         this.model.name = data['items'][0]['name']; 
-        this.model.email = data['items'][0]['email']; 
+        this.model.email = data['items'][0]['email'];
+        this.model.virtual_account = data['items'][0]['virtual_account'];
       },
       error => {
         console.log(error);
@@ -151,10 +153,11 @@ export class UsersComponent implements OnInit {
 
   delete_user(id: number){
     if(confirm('Are you sure?')){
-    this.http.get<any>(environment.api + "residence/delete_user/"+id, {
+    this.http.get<any>(environment.api + "users/delete_user/"+id, {
       headers: this.configService.headers()
     }).subscribe(
-      data => { 
+      data => {
+         window.location.reload(true);
       },
       error => {
         console.log(error);
@@ -166,7 +169,20 @@ export class UsersComponent implements OnInit {
 
   open(content: any, obj:any) {
     this.model = obj;
-    this.modalService.open(content);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log('Open');
+    }, (reason) => { // Untuk closed modal
+      console.log(`Dismissed`);
+      this.model.id = 0;
+      this.model.email = "";
+      this.model.name = "";
+      this.model.status = "";
+      this.model.id_user_access = 0;
+      this.model.virtual_account = "";
+      this.model.residence_status = "";
+      this.model.house = "";
+      this.model.username = "";
+    });
   }
 
 }

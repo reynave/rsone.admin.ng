@@ -18,7 +18,8 @@ export class Model {
     public rw_userId: number,
     public rt_username: string,
     public rw_username: string,
-    public userId: number
+    public userId: number,
+    public action: string,
   ) { } 
 }
 
@@ -44,13 +45,13 @@ export class EditModel {
 })
 export class RtRwComponent implements OnInit {
   items: any = [];  // open
-  resItems: any = [];
+  rtItems: any = [];
   rwItems: any = [];
   userItems: any = [];  // open
   userRTItems: any = [];
   userRWItems: any = [];
-  model : any = new Model(0,"","","","",0,0,"","",1);
-  editmodel : any = new EditModel(0,"","","","",0,0,"","",1);
+  model : any = new Model(0,"","014","","",0,0,"","",1,"create");
+  editmodel : any = new EditModel(0,"","014","","",0,0,"","",1);
   obj: any = [];
 
   constructor(
@@ -123,12 +124,24 @@ export class RtRwComponent implements OnInit {
       headers: this.configService.headers()
     }).subscribe(
       data => {  
-        this.resItems = data['items'];
+        this.rtItems = data['items'];
       },
       error => {
         console.log(error);
       },
     );
+
+    this.http.get<any>(environment.api + "residence/index", {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => {  
+        this.rwItems = data['items'];
+      },
+      error => {
+        console.log(error);
+      },
+    );
+
 
   }
 
@@ -188,11 +201,13 @@ export class RtRwComponent implements OnInit {
 
  open(content: any, obj: any){
     this.model = obj;
+    this.model.action = 'create';
     this.modalService.open(content);
  }
 
  openedit(content: any, obj: any){
-    this.editmodel = obj;
+    this.model = obj;
+    this.model.action = 'update';
     this.modalService.open(content);
  }
 
@@ -203,8 +218,8 @@ export class RtRwComponent implements OnInit {
       data => { 
         this.model.rt_userId = data['items'][0]['userId'];
         this.model.rt_username = data['items'][0]['name'];
-        this.editmodel.rt_userId = data['items'][0]['userId'];
-        this.editmodel.rt_username = data['items'][0]['name'];
+        //this.editmodel.rt_userId = data['items'][0]['userId'];
+        //this.editmodel.rt_username = data['items'][0]['name'];
       },
       error => {
         console.log(error);
@@ -220,8 +235,8 @@ export class RtRwComponent implements OnInit {
       data => { 
         this.model.rw_userId = data['items'][0]['userId'];
         this.model.rw_username = data['items'][0]['name'];
-        this.editmodel.rw_userId = data['items'][0]['userId'];
-        this.editmodel.rw_username = data['items'][0]['name'];
+        //this.editmodel.rw_userId = data['items'][0]['userId'];
+        //this.editmodel.rw_username = data['items'][0]['name'];
       },
       error => {
         console.log(error);
