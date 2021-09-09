@@ -13,7 +13,6 @@ export class UsersModel {
     public name: string,
     public status: string,
     public id_user_access: number,
-    public virtual_account: string,
     public residence_status: string,
     public house: string,
     public username: string,
@@ -30,7 +29,7 @@ export class UsersComponent implements OnInit {
   items: any = [];
   resItems: any = [];
   accessItems: any = [];
-  model : any = new UsersModel(0,"","","",0,"","","","");
+  model : any = new UsersModel(0,"","","",0,"","","");
   getId: any;
   obj: any = [];
 
@@ -142,7 +141,6 @@ export class UsersComponent implements OnInit {
         this.model.username = this.model.house;
         this.model.name = data['items'][0]['name']; 
         this.model.email = data['items'][0]['email'];
-        this.model.virtual_account = data['items'][0]['virtual_account'];
       },
       error => {
         console.log(error);
@@ -178,7 +176,6 @@ export class UsersComponent implements OnInit {
       this.model.name = "";
       this.model.status = "";
       this.model.id_user_access = 0;
-      this.model.virtual_account = "";
       this.model.residence_status = "";
       this.model.house = "";
       this.model.username = "";

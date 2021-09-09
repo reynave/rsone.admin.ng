@@ -177,20 +177,38 @@
                 <td> {{obj.input_date}}</td>
               </tr>
 
+              <tr>
+                <td>Unit</td>
+                <td>:</td>
+                <td> {{obj.house}}</td>
+              </tr>
+
+              <tr>
+                <td>RT</td>
+                <td>:</td>
+                <td>{{obj.rt == null ? '-' : obj.rt}}</td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 1"><!-- General -->
+                <td>Assignment</td>
+                <td>:</td>
+                <td>{{obj.assignUser}}</td>
+              </tr>
+
               <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
                 <td>Divisi Keamanan</td>
                 <td>:</td>
-                <td>{{model.scUser}}</td>
+                <td>{{obj.scUser}}</td>
               </tr>
               <tr *ngIf="obj.supportFormId == 4"><!-- renov -->
                 <td>Building Control</td>
                 <td>:</td>
-                <td>{{model.bcUser}}</td>
+                <td>{{obj.bcUser}}</td>
               </tr>
               <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
-                <td>RT</td>
+                <td>Ketua RT</td>
                 <td>:</td>
-                <td>{{model.rtUser}}</td>
+                <td>{{obj.rtUser}}</td>
               </tr>
 
               <tr>

@@ -177,6 +177,28 @@
                 <td> {{obj.input_date}}</td>
               </tr>
 
+              <tr>
+                <td>Unit</td>
+                <td>:</td>
+                <td> {{obj.house}}</td>
+              </tr>
+
+              <tr>
+                <td>RT</td>
+                <td>:</td>
+                <td>{{obj.rt == null ? '-' : obj.rt}}</td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 1"><!-- General -->
+                <td>Assignment</td>
+                <td>:</td>
+                <td>
+                  <select id="assignUser" name="assignUser" class="form-control form-control-sm" required [(ngModel)]="model.assignUser" #assignUser="ngModel" [ngModelOptions]="{standalone: true}">
+                     <option *ngFor="let ag of asgList" value="{{ag.name}}" [value]="ag.name">{{ag.name}}</option>
+                  </select>
+               </td>
+              </tr>
+
               <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
                 <td>Divisi Keamanan</td>
                 <td>:</td>
@@ -196,7 +218,7 @@
                 </td>
               </tr>
               <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
-                <td>RT</td>
+                <td>Ketua RT</td>
                 <td>:</td>
                 <td>
                   <select id="rtUser" name="rtUser" class="form-control form-control-sm" required [(ngModel)]="model.rtUser" #rtUser="ngModel" [ngModelOptions]="{standalone: true}">

@@ -184,10 +184,10 @@ export class RtRwComponent implements OnInit {
   }
 
  cancel(){
-    this.model.no_rt = '';
-    this.model.no_rw = '';
-    this.model.rt_userId = 0;
-    this.model.rw_userId = 0;
+    //this.model.no_rt = '';
+    //this.model.no_rw = '';
+    //this.model.rt_userId = 0;
+    //this.model.rw_userId = 0;
     this.modalService.dismissAll();
  }
 
@@ -209,6 +209,21 @@ export class RtRwComponent implements OnInit {
     this.model = obj;
     this.model.action = 'update';
     this.modalService.open(content);
+ }
+
+ actionDel(id: number){
+    if(confirm('Are you sure?')){
+    this.http.get<any>(environment.api + "rtrw/onDelete/"+id, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => { 
+        window.location.reload(true);
+      },
+      error => {
+        console.log(error);
+      },
+    );
+    }
  }
 
   setfromRes1(house:string){

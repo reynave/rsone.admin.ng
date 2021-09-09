@@ -16,6 +16,7 @@ export class Model {
     public note: string,
     public supportStatusId: number,
     public supportFormId: number,
+    public assignUser: string,
     public bcUser: string,
     public rwUser: string,
     public scUser: string,
@@ -32,7 +33,7 @@ export class Model {
 export class ClosedComponent implements OnInit {
   items: any = [];  // open
   userItems: any = [];  // open
-  model : any = new Model(0,"","","",0,0,"","","",1);
+  model : any = new Model(0,"","","",0,0,"","","","",1);
   getId: any;
   obj: any = [];
   //iurl: string;
@@ -43,6 +44,7 @@ export class ClosedComponent implements OnInit {
   rtList: any = []; // RT
   rwList: any = []; // RT
   bcList: any = []; // Building Control
+  asgList: any = []; // Assignment with Office House
 
   constructor(
     private modalService: NgbModal,
@@ -101,6 +103,18 @@ export class ClosedComponent implements OnInit {
     }).subscribe(
         data => {  
           this.bcList = data['items'];
+        },
+        error => {
+          console.error(error);
+          alert(error);
+        },
+    );
+
+    this.http.get<any>(environment.api + "users/all_office", {
+        headers: this.configService.headers()
+    }).subscribe(
+        data => {  
+          this.asgList = data['items'];
         },
         error => {
           console.error(error);
@@ -193,7 +207,10 @@ export class ClosedComponent implements OnInit {
     this.new_tab = 'https://forwards.or.id/admin.api.uat/formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
     //this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 10;
     this.model = obj;
-    if(obj.supportFormId == 2){
+    if(obj.supportFormId == 1){
+       this.model.assignUser = this.model.f2;
+    }
+    else if(obj.supportFormId == 2){
        this.model.scUser = this.model.f17; // Security
        this.model.rtUser = this.model.f18; // RT User
     }

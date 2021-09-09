@@ -14,7 +14,9 @@
         <tr>
           <th>No. RT</th>
           <th>No. RW</th>
+          <th>Unit Ketua RT</th>
           <th>RT</th>
+          <th>Unit Ketua RW</th>
           <th>RW</th>
           <th>&nbsp;</th>
         </tr>
@@ -23,9 +25,14 @@
         <tr *ngFor="let item of items">
           <td>{{item.no_rt}}</td>
           <td>{{item.no_rw}}</td>
+          <td>{{item.unit_rt}}</td>
           <td>{{item.rt_username}}</td>
+          <td>{{item.unit_rw}}</td>
           <td>{{item.rw_username}}</td>
-          <td><a role="button" class="btn btn-primary btn-sm" (click)="openedit(modalForm, item); obj = item;">Detail</a></td>
+          <td>
+             <a role="button" class="btn btn-primary btn-sm" (click)="openedit(modalForm, item); obj = item;">Detail</a>&nbsp;
+             <a role="button" class="btn btn-danger btn-sm" (click)="actionDel(item.id);">Delete</a>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -65,7 +72,7 @@
 	    </td>
 	  </tr>
 	  <tr>
-	    <td class="label p-2">Ketua RT</td>
+	    <td class="label p-2">Unit Ketua RT</td>
 	    <td class="p-2">:</td>
 	    <td class="input p-2">
 	      <select class="form-control" id="unit_rt" required [(ngModel)]="model.unit_rt" name="unit_rt" #unit_rt="ngModel" (change)="setfromRes1(model.unit_rt)">
@@ -85,7 +92,7 @@
 	    </td>
 	  </tr>
 	  <tr>
-	    <td class="label p-2">Ketua RW</td>
+	    <td class="label p-2">Unit Ketua RW</td>
 	    <td class="p-2">:</td>
 	    <td class="input p-2">
 	      <select class="form-control" id="unit_rw" required [(ngModel)]="model.unit_rw" name="unit_rw" #unit_rw="ngModel" (change)="setfromRes2(model.unit_rw)">
