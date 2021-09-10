@@ -46,7 +46,7 @@
                     <div class="col-7 row">
                         <label class="col-3 col-form-label">End date : </label>
                         <div class="col-9">
-                            <input type="date" class="form-control" id="end_date" required [(ngModel)]="model.end_date" name="end_date" #end_date="ngModel">
+                            <input type="date" class="form-control" id="end_date" required [(ngModel)]="model.end_date" name="end_date" #end_date="ngModel" (blur)="onDateRangeValid()">
                             <div [hidden]="end_date.valid || end_date.pristine" class="mt-2 text-danger">
                                end date is required
                             </div>

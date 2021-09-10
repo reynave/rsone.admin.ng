@@ -122,6 +122,17 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  onDateRangeValid(){
+      let fromDate = Date.parse(this.model.start_date);
+      let toDate = Date.parse(this.model.end_date);
+      if(fromDate >= toDate || fromDate === toDate ){
+         alert('Invalid date range! Please select date correctly.');
+      }
+      console.log(fromDate);
+      console.log(toDate);
+      // https://esausilva.com/2017/04/20/date-range-validation-in-javascript-es5-and-one-liner-es6/
+  }
+
   back(){
      localStorage.setItem('getId', '');
      this.router.navigate(['/cms']);
