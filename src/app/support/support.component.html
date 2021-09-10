@@ -189,6 +189,12 @@
                 <td>{{obj.rt == null ? '-' : obj.rt}}</td>
               </tr>
 
+              <tr><!-- Izin & renov -->
+                <td>Ketua RT</td>
+                <td>:</td>
+                <td>{{model.rtUser}}</td>
+              </tr>
+
               <tr *ngIf="obj.supportFormId == 1"><!-- General -->
                 <td>Assignment</td>
                 <td>:</td>
@@ -214,15 +220,6 @@
                 <td>
                   <select id="bcUser" name="bcUser" class="form-control form-control-sm" required [(ngModel)]="model.bcUser" #bcUser="ngModel" [ngModelOptions]="{standalone: true}">
                      <option *ngFor="let bc of bcList" value="{{bc.name}}" [value]="bc.name">{{bc.name}}</option>
-                  </select>
-                </td>
-              </tr>
-              <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
-                <td>Ketua RT</td>
-                <td>:</td>
-                <td>
-                  <select id="rtUser" name="rtUser" class="form-control form-control-sm" required [(ngModel)]="model.rtUser" #rtUser="ngModel" [ngModelOptions]="{standalone: true}">
-                     <option *ngFor="let rt of rtList" value="{{rt.name}}" [value]="rt.name">{{rt.name}}</option>
                   </select>
                 </td>
               </tr>
