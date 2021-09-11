@@ -171,14 +171,7 @@ export class UsersComponent implements OnInit {
       console.log('Open');
     }, (reason) => { // Untuk closed modal
       console.log(`Dismissed`);
-      this.model.id = 0;
-      this.model.email = "";
-      this.model.name = "";
-      this.model.status = "";
-      this.model.id_user_access = 0;
-      this.model.residence_status = "";
-      this.model.house = "";
-      this.model.username = "";
+      window.location.reload();
     });
   }
 

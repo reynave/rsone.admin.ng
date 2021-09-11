@@ -18,6 +18,7 @@ export class Model {
     public supportFormId: number,
     public assignUser: string,
     public bcUser: string,
+    public rtUser: string,
     public rwUser: string,
     public scUser: string,
     public userId: number
@@ -33,7 +34,7 @@ export class Model {
 export class SupportComponent implements OnInit {
   items: any = [];  // open
   userItems: any = [];  // open
-  model : any = new Model(0,"","","",0,0,"","","","",1);
+  model : any = new Model(0,"","","",0,0,"","","","","",1);
   getId: any;
   obj: any = [];
   //iurl: string;

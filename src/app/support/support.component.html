@@ -189,12 +189,6 @@
                 <td>{{obj.rt == null ? '-' : obj.rt}}</td>
               </tr>
 
-              <tr><!-- Izin & renov -->
-                <td>Ketua RT</td>
-                <td>:</td>
-                <td>{{model.rtUser}}</td>
-              </tr>
-
               <tr *ngIf="obj.supportFormId == 1"><!-- General -->
                 <td>Assignment</td>
                 <td>:</td>
@@ -206,7 +200,8 @@
               </tr>
 
               <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
-                <td>Divisi Keamanan</td>
+                <td *ngIf="obj.supportFormId == 2">Div Keamanan</td>
+                <td *ngIf="obj.supportFormId == 4">Security</td>
                 <td>:</td>
                 <td>
                   <select id="scUser" name="scUser" class="form-control form-control-sm" required [(ngModel)]="model.scUser" #scUser="ngModel" [ngModelOptions]="{standalone: true}">
@@ -214,6 +209,7 @@
                   </select>
                </td>
               </tr>
+
               <tr *ngIf="obj.supportFormId == 4"><!-- renov -->
                 <td>Building Control</td>
                 <td>:</td>
@@ -222,6 +218,18 @@
                      <option *ngFor="let bc of bcList" value="{{bc.name}}" [value]="bc.name">{{bc.name}}</option>
                   </select>
                 </td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 4"><!-- Izin & renov -->
+                <td>Ketua Forwards</td>
+                <td>:</td>
+                <td>{{model.rw}}</td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Izin & renov -->
+                <td>Ketua RT</td>
+                <td>:</td>
+                <td>{{model.rtUser}}</td>
               </tr>
 
               <tr>

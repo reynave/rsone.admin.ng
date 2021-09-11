@@ -18,6 +18,7 @@ export class Model {
     public supportFormId: number,
     public assignUser: string,
     public bcUser: string,
+    public rtUser: string,
     public rwUser: string,
     public scUser: string,
     public userId: number
@@ -33,7 +34,7 @@ export class Model {
 export class ClosedComponent implements OnInit {
   items: any = [];  // open
   userItems: any = [];  // open
-  model : any = new Model(0,"","","",0,0,"","","","",1);
+  model : any = new Model(0,"","","",0,0,"","","","","",1);
   getId: any;
   obj: any = [];
   //iurl: string;
@@ -209,14 +210,15 @@ export class ClosedComponent implements OnInit {
     this.model = obj;
     if(obj.supportFormId == 1){
        this.model.assignUser = this.model.f2;
+       this.model.rtUser = this.model.f4; // General diambil dari field f3 dari hasil pengisian template utk print preview
     }
-    else if(obj.supportFormId == 2){
+    else if(obj.supportFormId == 2){ // Izin
        this.model.scUser = this.model.f17; // Security
        this.model.rtUser = this.model.f18; // RT User
     }
-    else if(obj.supportFormId == 4){
+    else if(obj.supportFormId == 4){ // Renovasi
        this.model.scUser = this.model.f15; // Security
-       this.model.bcUser = this.model.f17; // RT User
+       this.model.bcUser = this.model.f17; // BuildCtrl User
        this.model.rtUser = this.model.f19; // RT User
     }
     this.modalService.open(content, { size: 'xl' });
