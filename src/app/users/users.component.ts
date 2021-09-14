@@ -14,6 +14,8 @@ export class UsersModel {
     public status: string,
     public id_user_access: number,
     public residence_status: string,
+    public ktp: string,
+    public phone_1: string,
     public house: string,
     public username: string,
   ) { } 
@@ -29,7 +31,7 @@ export class UsersComponent implements OnInit {
   items: any = [];
   resItems: any = [];
   accessItems: any = [];
-  model : any = new UsersModel(0,"","","",0,"","","");
+  model : any = new UsersModel(0,"","","",0,"","","","","");
   getId: any;
   obj: any = [];
 

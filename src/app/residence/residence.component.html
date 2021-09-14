@@ -2,16 +2,20 @@
 <main class="flex-shrink-0">
   <div class="container-fluid">
     <div class="row mb-4">
-      <div class="col-12">
+      <div class="col-6">
         <strong>Residence</strong>
+      </div>
+      <div class="col-6 text-right">
+        <a role="button" class="btn btn-primary btn-sm" (click)="open(modalForm,model)">Create New Residence</a>
       </div>
     </div>
     <table id="example" class="display" style="width:100%">
       <thead>
         <tr>
           <th>Unit</th>
-          <th>ID Warga</th>
-          <th>Warga</th>
+          <!--<th>ID Warga</th>
+          <th>Warga</th>-->
+          <th>Name</th>
           <th>Email</th>
           <th>Virtual Account</th>
           <th>No. RT</th>
@@ -24,15 +28,19 @@
       <tbody>
         <tr *ngFor="let item of items">
           <td>{{item.house}}</td>
-          <td>{{item.userId}}</td>
-          <td>{{item.user_name}}</td>
+          <!--<td>{{item.userId}}</td>
+          <td>{{item.user_name}}</td>-->
+          <td>{{item.name}}</td>
           <td>{{item.email}}</td>
           <td>{{item.virtual_account}}</td>
           <td>{{item.no_rt}}</td>
           <td>{{item.no_rw}}</td>
           <td>{{item.rt_user}}</td>
           <td>{{item.rw_user}}</td>
-          <td><a role="button" class="btn btn-primary btn-sm" (click)="open(modalForm, item); obj = item;">Detail</a></td>
+          <td>
+              <a role="button" class="btn btn-primary btn-sm" (click)="open(modalForm, item); obj = item;">Detail</a>&nbsp;
+              <a role="button" class="btn btn-danger btn-sm" (click)="onDelete(item.id)">Delete</a>
+         </td>
         </tr>
       </tbody>
     </table>
@@ -51,17 +59,34 @@
        <table class="tg">
          <tbody>
            <tr>
-             <td class="tg-0lax" style="width: 30%">House</td>
+             <td class="tg-0lax" style="width: 30%">Unit</td>
              <td class="tg-0lax">:</td>
              <td class="tg-0lax">
-                <input type="text" class="form-control" readonly id="house" required [(ngModel)]="model.house" name="house" #house="ngModel">
+                <input type="text" class="form-control" id="house" required [(ngModel)]="model.house" name="house" #house="ngModel">
              </td>
           </tr>
-          <tr>
+           <tr>
+             <td class="tg-0lax" style="width: 30%">Name</td>
+             <td class="tg-0lax">:</td>
+             <td class="tg-0lax">
+                <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
+                <div [hidden]="name.valid || name.pristine" class="mt-2 text-danger">
+                    name is required
+                </div>
+             </td>
+          </tr>
+           <tr>
+             <td class="tg-0lax" style="width: 30%">Email</td>
+             <td class="tg-0lax">:</td>
+             <td class="tg-0lax">
+                <input type="text" class="form-control" id="email" required [(ngModel)]="model.email" name="email" #email="ngModel">
+             </td>
+          </tr>
+          <!--<tr>
              <td class="tg-0lax">ID Warga</td>
              <td class="tg-0lax">:</td>
              <td class="tg-0lax">
-                <input type="text" readonly class="form-control-plaintext" [(ngModel)]="model.userId" name="userId" #userId="ngModel" value="{{model.userId}}">
+                <input type="text" readonly class="form-control" [(ngModel)]="model.userId" name="userId" #userId="ngModel" value="{{model.userId}}">
              </td>
           </tr>
           <tr>
@@ -75,12 +100,15 @@
                     warga is required
                 </div>
              </td>
-          </tr>
+          </tr>-->
           <tr>
              <td class="tg-0lax">Virtual Account</td>
              <td class="tg-0lax">:</td>
              <td class="tg-0lax">
-                <input type="text" readonly class="form-control-plaintext" [(ngModel)]="model.virtual_account" name="virtual_account" #virtual_account="ngModel" value="{{model.virtual_account}}">
+                <input type="text" class="form-control" [(ngModel)]="model.virtual_account" name="virtual_account" #virtual_account="ngModel" value="{{model.virtual_account}}">
+                <div [hidden]="virtual_account.valid || virtual_account.pristine" class="mt-2 text-danger">
+                    virtual account is required
+                </div>
              </td>
           </tr>
           <tr>
@@ -90,8 +118,8 @@
                 <select class="custom-select" id="rt_rw_id" required [(ngModel)]="model.rt_rw_id" name="rt_rw_id" #rt_rw_id="ngModel">
                    <option *ngFor="let ui of rtrwItems" value="{{ui.id}}" [value]="ui.id" [selected]="model.rt_rw_id == ui.id">{{ui.no_rt+'/'+ui.no_rw}}</option>
                 </select>
-                <div [hidden]="userId.valid || userId.pristine" class="mt-2 text-danger">
-                    user is required
+                <div [hidden]="rt_rw_id.valid || rt_rw_id.pristine" class="mt-2 text-danger">
+                    rt/rw is required
                 </div>
              </td>
           </tr>

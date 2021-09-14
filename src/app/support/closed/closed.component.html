@@ -192,7 +192,11 @@
               <tr *ngIf="obj.supportFormId == 1"><!-- General -->
                 <td>Assignment</td>
                 <td>:</td>
-                <td>model.assignUser</td>
+                <td>
+                  <select id="assignUser" name="assignUser" class="form-control form-control-sm" required [(ngModel)]="model.assignUser" #assignUser="ngModel" [ngModelOptions]="{standalone: true}">
+                     <option *ngFor="let ag of asgList" value="{{ag.name}}" [value]="ag.name">{{ag.name}}</option>
+                  </select>
+               </td>
               </tr>
 
               <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
@@ -208,16 +212,58 @@
                 <td>{{model.bcUser}}</td>
               </tr>
 
-              <tr *ngIf="obj.supportFormId == 4"><!-- Izin & renov -->
+              <tr *ngIf="obj.supportFormId == 4"><!-- Renovasi -->
                 <td>Ketua Forwards</td>
                 <td>:</td>
                 <td>{{model.rw}}</td>
               </tr>
 
-              <tr *ngIf="obj.supportFormId == 2"><!-- Izin & renov -->
+              <tr *ngIf="obj.supportFormId == 2"><!-- Izin -->
                 <td>Ketua RT</td>
                 <td>:</td>
                 <td>{{model.rtUser}}</td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td colspan="3"><strong>Surat izin berlaku</strong></td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td>Dari Tanggal</td>
+                <td>:</td>
+                <td>{{ model.startDate }}</td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td>Sampai Tanggal</td>
+                <td>:</td>
+                <td>{{ model.endDate }}</td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td>IPL</td>
+                <td>:</td>
+                <td>
+                   <div class="form-check">
+                        <input class="form-check-input" type="checkbox" aria-label="IPL" id="chkIPL" disabled name="chkIPL" [(ngModel)]="model.chkIPL" #chkIPL="ngModel">
+                        <label class="form-check-label">
+                            {{ model.noteIPL }}
+                        </label>
+                   </div>
+                </td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td>Note</td>
+                <td>:</td>
+                <td>
+                   <div class="form-check">
+                        <input class="form-check-input" type="checkbox" aria-label="Note" id="chkNote" disabled name="chkNote" [(ngModel)]="model.chkNote" #chkNote="ngModel">
+                        <label class="form-check-label">
+                            {{ model.izinNote }}
+                        </label>
+                   </div>
+                </td>
               </tr>
 
               <tr>

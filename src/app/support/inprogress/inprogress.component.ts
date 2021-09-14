@@ -21,7 +21,13 @@ export class Model {
     public rtUser: string,
     public rwUser: string,
     public scUser: string,
-    public userId: number
+    public userId: number,
+    public chkIPL: boolean,
+    public noteIPL: string,
+    public chkNote: boolean,
+    public izinNote: string,
+    public startDate: string,
+    public endDate: string,
   ) { } 
 }
 
@@ -34,7 +40,7 @@ export class Model {
 export class InprogressComponent implements OnInit {
   items: any = [];  // open
   userItems: any = [];  // open
-  model : any = new Model(0,"","","",0,0,"","","","","",1);
+  model : any = new Model(0,"","","",0,0,"","","","","",1,false,"",false,"","","");
   getId: any;
   obj: any = [];
   //iurl: string;
@@ -46,6 +52,8 @@ export class InprogressComponent implements OnInit {
   rwList: any = []; // RT
   bcList: any = []; // Building Control
   asgList: any = []; // Assignment with Office House
+  read1: boolean = false;
+  read2: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -193,6 +201,17 @@ export class InprogressComponent implements OnInit {
     window.open(url, "_blank");
   }
 
+  chkIPL_click(){
+     if(this.model.chkIPL) this.read1 = true;
+     console.log(this.model.chkIPL);
+  }
+
+  chkNote_click(){
+     this.model.chkNote = true;
+     if(this.model.chkNote) this.read2 = true;
+     console.log(this.model.chkNote);
+  }
+
   open(content: any, obj: any) {
     let fro = '';
     if(obj.supportFormId == 2){ // izin
@@ -204,8 +223,8 @@ export class InprogressComponent implements OnInit {
     else{
        fro = 'general';
     }
-    this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl('https://forwards.or.id/admin.api.uat/formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : ''));
-    this.new_tab = 'https://forwards.or.id/admin.api.uat/formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
+    this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.api+'formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : ''));
+    this.new_tab = environment.api+'formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
     //this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 10;
     this.model = obj;
     if(obj.supportFormId == 1){
@@ -215,6 +234,12 @@ export class InprogressComponent implements OnInit {
     else if(obj.supportFormId == 2){ // Izin
        this.model.scUser = this.model.f17; // Security
        this.model.rtUser = this.model.f18; // RT User
+       this.model.startDate = this.model.f19; // Start Date
+       this.model.endDate = this.model.f20; // End Date
+       this.model.chkIPL = (this.model.f21 != null) ? true : false;
+       this.model.noteIPL = this.model.f22;
+       this.model.chkNote = (this.model.f23 != null) ? true : false;
+       this.model.izinNote = this.model.f24;
     }
     else if(obj.supportFormId == 4){ // Renovasi
        this.model.scUser = this.model.f15; // Security

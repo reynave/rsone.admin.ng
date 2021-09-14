@@ -12,6 +12,7 @@ export class Model {
   constructor(
     public id: number,
     public house: string,
+    public name: string,
     public userId: number,
     public virtual_account: string,
     public userName: string,
@@ -30,7 +31,7 @@ export class ResidenceComponent implements OnInit {
 
   items: any = [];
   loading: boolean = false;
-  model : any = new Model(0,"",0,"","",0);
+  model : any = new Model(0,"","",0,"","",0);
   userItems: any = [];
   rtrwItems: any = [];
   obj: any;
@@ -107,10 +108,27 @@ export class ResidenceComponent implements OnInit {
        window.location.reload();
       },
       error => {
+        console.error(error);
+        alert("This unit "+this.model.house+" already exist. Please select another unit.");
+      },
+
+    );
+  }
+
+  onDelete(id: number){
+    if(confirm('Are you sure?')){
+    this.http.get<any>(environment.api + "residence/onDelete/"+id, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => {
+         window.location.reload(true);
+      },
+      error => {
         console.log(error);
       },
 
     );
+    }
   }
 
   changeWarga()
@@ -134,7 +152,12 @@ export class ResidenceComponent implements OnInit {
 
   open(content: any, obj: any) {
     this.model = obj;
-    this.modalService.open(content, { size: 'md' });
+    this.modalService.open(content, { size: 'md' }).result.then((result) => {
+      console.log('Open');
+    }, (reason) => { // Untuk closed modal
+      console.log(`Dismissed`);
+      window.location.reload();
+    });
   }
 
 }

@@ -70,7 +70,7 @@
     <td class="tg-0lax">User name</td>
     <td class="tg-0lax">:</td>
     <td class="tg-0lax">
-      <input class="form-control" id="username" name="username" class="form-control" required [(ngModel)]="model.username" #username="ngModel" value="">
+      <input class="form-control" id="username" name="username" class="form-control" required [(ngModel)]="model.username" #username="ngModel">
       <div [hidden]="username.valid || username.pristine" class="mt-2 text-danger">
         username is required
       </div>
@@ -80,7 +80,7 @@
     <td class="tg-0lax">Name</td>
     <td class="tg-0lax">:</td>
     <td class="tg-0lax">
-      <input class="form-control" id="name" name="name" class="form-control" required [(ngModel)]="model.name" #name="ngModel" value="">
+      <input class="form-control" id="name" name="name" class="form-control" required [(ngModel)]="model.name" #name="ngModel">
       <div [hidden]="name.valid || name.pristine" class="mt-2 text-danger">
         name is required
       </div>
@@ -90,9 +90,29 @@
     <td class="tg-0lax">Email</td>
     <td class="tg-0lax">:</td>
     <td class="tg-0lax">
-      <input class="form-control" id="email" name="email" class="form-control" required [(ngModel)]="model.email" #name="ngModel" value="">
+      <input class="form-control" id="email" name="email" class="form-control" required [(ngModel)]="model.email" #name="ngModel">
       <div [hidden]="name.valid || name.pristine" class="mt-2 text-danger">
         email is required
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">KTP</td>
+    <td class="tg-0lax">:</td>
+    <td class="tg-0lax">
+      <input class="form-control" id="ktp" name="ktp" class="form-control" required [(ngModel)]="model.ktp" #ktp="ngModel">
+      <div [hidden]="ktp.valid || ktp.pristine" class="mt-2 text-danger">
+        ktp is required
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Phone Number</td>
+    <td class="tg-0lax">:</td>
+    <td class="tg-0lax">
+      <input class="form-control" id="phone_1" name="phone_1" class="form-control" required [(ngModel)]="model.phone_1" #phone_1="ngModel">
+      <div [hidden]="phone_1.valid || phone_1.pristine" class="mt-2 text-danger">
+        phone number is required
       </div>
     </td>
   </tr>

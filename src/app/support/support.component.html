@@ -220,16 +220,58 @@
                 </td>
               </tr>
 
-              <tr *ngIf="obj.supportFormId == 4"><!-- Izin & renov -->
+              <tr *ngIf="obj.supportFormId == 4"><!-- Renovasi -->
                 <td>Ketua Forwards</td>
                 <td>:</td>
                 <td>{{model.rw}}</td>
               </tr>
 
-              <tr *ngIf="obj.supportFormId == 2"><!-- Izin & renov -->
+              <tr *ngIf="obj.supportFormId == 2"><!-- Izin -->
                 <td>Ketua RT</td>
                 <td>:</td>
                 <td>{{model.rtUser}}</td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td colspan="3"><strong>Surat izin berlaku</strong></td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td>Dari Tanggal</td>
+                <td>:</td>
+                <td><input class="form-control form-control-sm" type="date" id="startDate" name="startDate" [(ngModel)]="model.startDate" #startDate="ngModel" /></td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td>Sampai Tanggal</td>
+                <td>:</td>
+                <td><input class="form-control form-control-sm" type="date" id="endDate" name="endDate" [(ngModel)]="model.endDate" #endDate="ngModel" /></td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td>IPL</td>
+                <td>:</td>
+                <td>
+                  <div class="input-group">
+                     <div class="input-group-text">
+                        <input class="" type="checkbox" aria-label="IPL" id="chkIPL" name="chkIPL" [(ngModel)]="model.chkIPL" #chkIPL="ngModel" (click)="chkIPL_click()">
+                     </div>
+                     <input type="text" class="form-control form-control-sm" aria-label="IPL Note" id="noteIPL" name="noteIPL" [(ngModel)]="model.noteIPL" #noteIPL="ngModel">
+                  </div>
+                </td>
+              </tr>
+
+              <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
+                <td>Note</td>
+                <td>:</td>
+                <td>
+                  <div class="input-group">
+                     <div class="input-group-text">
+                        <input class="" type="checkbox" aria-label="Note" id="chkNote" name="chkNote" [(ngModel)]="model.chkNote" #chkNote="ngModel" (click)="chkNote_click()">
+                     </div>
+                     <input type="text" class="form-control form-control-sm" aria-label="Note" id="izinNote" name="izinNote" [(ngModel)]="model.izinNote" #izinNote="ngModel">
+                  </div>
+                </td>
               </tr>
 
               <tr>

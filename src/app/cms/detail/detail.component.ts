@@ -17,6 +17,7 @@ export class Model {
     public name: string,
     public content: string,
     public status: number,
+    public filename: string,
   ) { } 
 }
 
@@ -27,10 +28,11 @@ export class Model {
 })
 export class DetailComponent implements OnInit {
 
+  file: any; // Variable to store file
   items: any = [];
   categoryItems: any = [];
   obj: any = [];
-  model: any = new Model(0,0,"","","","",0);
+  model: any = new Model(0,0,"","","","",0,"");
   getId: any;
   config: any = {
      height: 300,
@@ -87,12 +89,33 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  onChange(event: any) {
+    this.file = typeof event.target.files[0] != "undefined" ? event.target.files[0] : '';
+  }
+
   onSubmit(){
     let action = localStorage.getItem('action');
+
+    if (typeof (this.file) != "undefined") {
+       
+       const formData = new FormData();
+       formData.append("filename", this.file);
+       this.model.filename = this.file.name;
+       this.http.post<any>(environment.api + "content/onUpload", formData).subscribe(
+          data => { 
+          console.log(data);
+        },
+        error => {
+
+        },
+      );
+    }
+
     const body = {
       data : this.model,
     }
-    console.log(body);
+        
+    // Store form name as "file" with file data
     
     if(action == 'create'){
     this.http.post<any>(environment.api + "content/onSubmit", body, {
