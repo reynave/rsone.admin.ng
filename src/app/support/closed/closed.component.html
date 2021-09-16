@@ -189,6 +189,12 @@
                 <td>{{obj.rt == null ? '-' : obj.rt}}</td>
               </tr>
 
+              <tr *ngIf="obj.supportFormId == 2"><!-- Izin -->
+                <td>Ketua RT</td>
+                <td>:</td>
+                <td>{{model.rtUser}}</td>
+              </tr>
+
               <tr *ngIf="obj.supportFormId == 1"><!-- General -->
                 <td>Assignment</td>
                 <td>:</td>
@@ -216,12 +222,6 @@
                 <td>Ketua Forwards</td>
                 <td>:</td>
                 <td>{{model.rw}}</td>
-              </tr>
-
-              <tr *ngIf="obj.supportFormId == 2"><!-- Izin -->
-                <td>Ketua RT</td>
-                <td>:</td>
-                <td>{{model.rtUser}}</td>
               </tr>
 
               <tr *ngIf="obj.supportFormId == 2"><!-- Renovasi -->
