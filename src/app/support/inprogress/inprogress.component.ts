@@ -223,8 +223,8 @@ export class InprogressComponent implements OnInit {
     else{
        fro = 'general';
     }
-    this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.api+'formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : ''));
-    this.new_tab = environment.api+'formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print';
+    this.iurl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.api+'formresidenceone/index/'+fro+'?ticket='+( obj != null ? obj.ticketNumber : '')+'&t='+this.configService.token());
+    this.new_tab = environment.api+'formresidenceone/index/'+fro+'?ticket='+( obj ? obj.ticketNumber : '')+'&action=print&t='+this.configService.token();
     //this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 10;
     this.model = obj;
     if(obj.supportFormId == 1){
