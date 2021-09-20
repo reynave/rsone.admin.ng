@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ConfigService } from 'src/app/service/config.service';
 import {Observable} from 'rxjs';
 
 
@@ -11,8 +12,8 @@ export class FileUploadService {
 
   // API url
   baseApiUrl = "https://file.io"
-
-  constructor(private http:HttpClient) { }
+  varHeaders: any = []; 
+  constructor(private http:HttpClient,private configService: ConfigService) { }
 
   // Returns an observable
   upload(file: any) {
@@ -22,10 +23,11 @@ export class FileUploadService {
         
       // Store form name as "file" with file data
       formData.append("filename", file);
+      formData.append('token', this.configService.token());
         
       // Make http post request over api
       // with formData as req
-      this.http.post<any>(environment.api + "billing/upload", formData).subscribe(
+      this.http.post<any>(environment.api + "upload/billing", formData).subscribe(
         data => { 
          if(data['error'] != 0){
             window.alert(data['error']); 

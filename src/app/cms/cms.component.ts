@@ -126,6 +126,22 @@ export class CmsComponent implements OnInit {
     );
   }
 
+  onDelete(id: number){
+    if(confirm('Are you sure?')){
+    this.http.get<any>(environment.api + "content/onDelete/"+id, {
+      headers: this.configService.headers()
+    }).subscribe(
+      data => {
+         window.location.reload(true);
+      },
+      error => {
+        console.log(error);
+      },
+
+    );
+    }
+  }
+
   cmsStatus(param: number){
      let txt = '';
      if(param == 0) { txt = 'Draft'; }

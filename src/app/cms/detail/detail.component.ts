@@ -100,8 +100,9 @@ export class DetailComponent implements OnInit {
        
        const formData = new FormData();
        formData.append("filename", this.file);
+       formData.append('token', this.configService.token());
        this.model.filename = this.file.name;
-       this.http.post<any>(environment.api + "content/onUpload", formData).subscribe(
+       this.http.post<any>(environment.api + "upload/cmsImage", formData).subscribe(
           data => { 
           console.log(data);
         },
