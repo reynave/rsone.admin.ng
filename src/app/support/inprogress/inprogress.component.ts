@@ -212,6 +212,19 @@ export class InprogressComponent implements OnInit {
      console.log(this.model.chkNote);
   }
 
+  onDateRangeValid(){
+      let fromDate = Date.parse(this.model.startDate);
+      let toDate = Date.parse(this.model.endDate);
+      if(fromDate >= toDate || fromDate === toDate ){
+         alert('Invalid date range! Please select date correctly.');
+         this.model.startDate = '';
+         this.model.endDate = '';
+      }
+      console.log(fromDate);
+      console.log(toDate);
+      // https://esausilva.com/2017/04/20/date-range-validation-in-javascript-es5-and-one-liner-es6/
+  }
+
   open(content: any, obj: any) {
     let fro = '';
     if(obj.supportFormId == 2){ // izin
