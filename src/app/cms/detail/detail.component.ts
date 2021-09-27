@@ -149,8 +149,9 @@ export class DetailComponent implements OnInit {
   onDateRangeValid(){
       let fromDate = Date.parse(this.model.start_date);
       let toDate = Date.parse(this.model.end_date);
-      if(fromDate >= toDate || fromDate === toDate ){
+      if(fromDate >= toDate || isNaN(toDate)){
          alert('Invalid date range! Please select date correctly.');
+         this.model.end_date = "";
       }
       console.log(fromDate);
       console.log(toDate);

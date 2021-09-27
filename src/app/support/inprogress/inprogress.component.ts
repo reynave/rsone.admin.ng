@@ -215,7 +215,7 @@ export class InprogressComponent implements OnInit {
   onDateRangeValid(){
       let fromDate = Date.parse(this.model.startDate);
       let toDate = Date.parse(this.model.endDate);
-      if(fromDate >= toDate || fromDate === toDate ){
+      if(fromDate >= toDate || isNaN(toDate)){
          alert('Invalid date range! Please select date correctly.');
          this.model.startDate = '';
          this.model.endDate = '';
