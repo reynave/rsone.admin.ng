@@ -198,11 +198,7 @@
               <tr *ngIf="obj.supportFormId == 1"><!-- General -->
                 <td>Assignment</td>
                 <td>:</td>
-                <td>
-                  <select id="assignUser" name="assignUser" class="form-control form-control-sm" required [(ngModel)]="model.assignUser" #assignUser="ngModel" [ngModelOptions]="{standalone: true}">
-                     <option *ngFor="let ag of asgList" value="{{ag.name}}" [value]="ag.name">{{ag.name}}</option>
-                  </select>
-               </td>
+                <td>{{model.assignUser}}</td>
               </tr>
 
               <tr *ngIf="obj.supportFormId == 2 || obj.supportFormId == 4"><!-- Izin & renov -->
