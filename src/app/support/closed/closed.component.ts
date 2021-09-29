@@ -228,7 +228,7 @@ export class ClosedComponent implements OnInit {
     //this.model.supportStatusId = obj.supportStatusId ? obj.supportStatusId : 10;
     this.model = obj;
     if(obj.supportFormId == 1){
-       this.model.assignUser = this.model.f2;
+       this.model.assignUser = this.model.f5;
        this.model.rtUser = this.model.f4; // General diambil dari field f3 dari hasil pengisian template utk print preview
     }
     else if(obj.supportFormId == 2){ // Izin
