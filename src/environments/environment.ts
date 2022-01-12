@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   //api : "https://forwards.or.id/admin.api/"
-  api : "https://forwards.or.id/admin.api.uat/",
+  api : "https://dev.forwards.or.id/admin.api.uat/",
 };
 
 /*
